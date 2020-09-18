@@ -7,15 +7,15 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/main_feed_header"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:fontFamily="@font/sonnenstrahl_ausgezeichnet"
-        android:text="@string/app_heading"
-        android:textSize="30sp"
-        android:textColor="@color/black"
         android:gravity="center"
+        android:text="@string/app_heading"
+        android:textColor="@color/black"
+        android:textSize="32sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
