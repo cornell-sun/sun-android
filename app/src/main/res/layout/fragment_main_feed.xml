@@ -4,26 +4,22 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <FrameLayout
+
+    <TextView
+        android:id="@+id/main_feed_header"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
-            android:id="@+id/main_feed_header"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:fontFamily="@font/sonnenstrahl_ausgezeichnet"
-            android:gravity="center"
-            android:text="@string/app_heading"
-            android:textColor="@color/black"
-            android:textSize="32sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/main_feed_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/main_feed_header"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:listitem="@layout/list_item_article"/>
-    </FrameLayout>
+        android:layout_height="60dp"
+        android:fontFamily="@font/sonnenstrahl_ausgezeichnet"
+        android:gravity="center"
+        android:text="@string/app_heading"
+        android:textColor="@color/black"
+        android:textSize="32sp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_feed_section_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/list_item_main_feed_section"
+        app:layout_constraintTop_toBottomOf="@id/main_feed_header" />
 </androidx.constraintlayout.widget.ConstraintLayout>
