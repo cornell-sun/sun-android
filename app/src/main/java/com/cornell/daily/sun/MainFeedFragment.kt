@@ -5,34 +5,43 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cornell.daily.sun.adapters.MainFeedSectionAdapter
-import com.cornell.daily.sun.data.Article
-import com.cornell.daily.sun.data.Section
+import com.cornell.daily.sun.viewmodels.MainFeedViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_main_feed.view.*
 
+@AndroidEntryPoint
 class MainFeedFragment : Fragment() {
+    private val mainFeedViewModel: MainFeedViewModel by lazy {
+        ViewModelProvider(this).get(MainFeedViewModel::class.java)
+    }
     private lateinit var mainFeedSectionsRecyclerView: RecyclerView
-    private lateinit var mainFeedAdapter: RecyclerView.Adapter<*>
-    private lateinit var mainFeedLayoutManager: LinearLayoutManager
-    private var sections = mutableListOf(
-        Section("News", mutableListOf(Article("Go Big Red"))),
-        Section("News", mutableListOf(Article("Go Big Red")))
-    )
+    private lateinit var mainFeedSectionAdapter: RecyclerView.Adapter<*>
+    private lateinit var mainFeedSectionLayoutManager: LinearLayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_main_feed, container, false)
-        mainFeedSectionsRecyclerView = view.findViewById(R.id.main_feed_section_list)
-        mainFeedLayoutManager = LinearLayoutManager(activity)
-        mainFeedAdapter = MainFeedSectionAdapter(sections)
+        val binding = inflater.inflate(R.layout.fragment_main_feed, container, false)
+
+        mainFeedSectionsRecyclerView = binding.main_feed_section_list
+        mainFeedSectionLayoutManager = LinearLayoutManager(activity)
+        mainFeedSectionAdapter = MainFeedSectionAdapter()
+
         mainFeedSectionsRecyclerView.apply {
-            adapter = mainFeedAdapter
-            layoutManager = mainFeedLayoutManager
+            adapter = mainFeedSectionAdapter
+            layoutManager = mainFeedSectionLayoutManager
         }
-        return view
+
+        mainFeedViewModel.sections.observe(viewLifecycleOwner) { sections ->
+            (mainFeedSectionAdapter as MainFeedSectionAdapter).submitList(sections)
+        }
+
+        return binding
     }
 }

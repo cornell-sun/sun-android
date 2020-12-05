@@ -5,12 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cornell.daily.sun.R
-import com.cornell.daily.sun.data.Article
+import com.cornell.daily.sun.data.PostObject
 
-class MainFeedArticleAdapter(private var articles: MutableList<Article>) :
-    RecyclerView.Adapter<MainFeedArticleAdapter.ArticleHolder>() {
+class MainFeedArticleAdapter :
+    ListAdapter<PostObject, MainFeedArticleAdapter.ArticleHolder>(PostObjectDiffCallback()) {
     class ArticleHolder internal constructor(articleView: View) :
         RecyclerView.ViewHolder(articleView) {
         val articleTitle: TextView = articleView.findViewById(R.id.article_title)
@@ -25,8 +27,17 @@ class MainFeedArticleAdapter(private var articles: MutableList<Article>) :
     }
 
     override fun onBindViewHolder(holder: ArticleHolder, position: Int) {
-        holder.articleTitle.text = articles[position].title
+        holder.articleTitle.text = currentList[position].title
+    }
+}
+
+private class PostObjectDiffCallback : DiffUtil.ItemCallback<PostObject>() {
+    override fun areItemsTheSame(oldItem: PostObject, newItem: PostObject): Boolean {
+        return oldItem.id == newItem.id
     }
 
-    override fun getItemCount(): Int = articles.size
+    override fun areContentsTheSame(oldItem: PostObject, newItem: PostObject): Boolean {
+        return oldItem == newItem
+    }
+
 }
