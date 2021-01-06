@@ -1,9 +1,11 @@
 package com.cornell.daily.sun.viewmodels
 
+import android.provider.Settings
 import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.cornell.daily.sun.data.Post
 import com.cornell.daily.sun.data.PostRepository
 import com.cornell.daily.sun.data.Section
 import com.cornell.daily.sun.data.SectionType
@@ -20,11 +22,12 @@ class MainFeedViewModel @ViewModelInject constructor(private val postRepository:
         }
     }
 
-    private suspend fun loadSections() {
+    suspend fun loadSections() {
         // Create featured section separately
         val sectionPosts = postRepository.getSectionPosts()
         val featuredSection =
             Section(SectionType.FEATURED, mutableListOf((postRepository.getFeaturedPost())))
+        featuredSection.posts[0].featuredMediaImages?.full?.url?.let { Log.i("Featured: ", it) }
         sectionPosts.add(0, featuredSection)
         Log.i(
             "Section Posts Size", sectionPosts.size

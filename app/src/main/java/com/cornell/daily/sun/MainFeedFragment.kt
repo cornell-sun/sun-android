@@ -8,10 +8,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.cornell.daily.sun.adapters.MainFeedSectionAdapter
 import com.cornell.daily.sun.viewmodels.MainFeedViewModel
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_main_feed.view.*
+import kotlinx.android.synthetic.main.main_feed_featured_article.view.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainFeedFragment : Fragment() {
@@ -19,7 +25,10 @@ class MainFeedFragment : Fragment() {
         ViewModelProvider(this).get(MainFeedViewModel::class.java)
     }
     private lateinit var mainFeedSectionsRecyclerView: RecyclerView
-    private lateinit var mainFeedSectionAdapter: RecyclerView.Adapter<*>
+
+
+    @Inject
+    lateinit var mainFeedSectionAdapter: MainFeedSectionAdapter
     private lateinit var mainFeedSectionLayoutManager: LinearLayoutManager
 
     override fun onCreateView(
@@ -31,7 +40,6 @@ class MainFeedFragment : Fragment() {
 
         mainFeedSectionsRecyclerView = binding.main_feed_section_list
         mainFeedSectionLayoutManager = LinearLayoutManager(activity)
-        mainFeedSectionAdapter = MainFeedSectionAdapter()
 
         mainFeedSectionsRecyclerView.apply {
             adapter = mainFeedSectionAdapter
@@ -39,7 +47,14 @@ class MainFeedFragment : Fragment() {
         }
 
         mainFeedViewModel.sections.observe(viewLifecycleOwner) { sections ->
-            (mainFeedSectionAdapter as MainFeedSectionAdapter).submitList(sections)
+            mainFeedSectionAdapter.submitList(sections)
+        }
+
+        binding.main_feed_swipe_container.setOnRefreshListener {
+            GlobalScope.launch {
+                mainFeedViewModel.loadSections()
+                binding.main_feed_swipe_container.isRefreshing = false
+            }
         }
 
         return binding

@@ -3,12 +3,9 @@ package com.cornell.daily.sun.data
 class SuggestedStoryObject internal constructor(
     var postID: Int,
     var title: String,
-    var authors: Array<AuthorObject>,
-    featuredMediaImages: FeaturedMediaImages
+    var authors: Array<Author>,
+    featuredMediaImages: Images
 ) {
-    var featuredMediaImages: FeaturedMediaImages
+    var featuredMediaImages: Images = featuredMediaImages
 
-    init {
-        this.featuredMediaImages = featuredMediaImages
-    }
 }

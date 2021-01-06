@@ -36,7 +36,7 @@ class PostRepository @Inject constructor(private val service: SunWordpressServic
         return deferredCalls.awaitAll().toMutableList()
     }
 
-    suspend fun getFeaturedPost(): PostObject {
+    suspend fun getFeaturedPost(): Post {
         return service.getFeaturedPost()
     }
 

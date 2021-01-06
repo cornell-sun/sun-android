@@ -1,34 +1,45 @@
 package com.cornell.daily.sun.adapters
 
-import android.util.Log
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.cornell.daily.sun.R
 import com.cornell.daily.sun.data.Section
 import com.cornell.daily.sun.data.SectionType
+import com.squareup.picasso.Picasso
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class MainFeedSectionAdapter :
+@Singleton
+class MainFeedSectionAdapter @Inject constructor(@ApplicationContext private val context: Context) :
     ListAdapter<Section, RecyclerView.ViewHolder>(PostObjectListDiffCallback()) {
 
     class SectionHolder internal constructor(sectionView: View) :
         RecyclerView.ViewHolder(sectionView) {
         val sectionTitle: TextView = sectionView.findViewById(R.id.section_title)
-        val topDivider: View = sectionView.findViewById(R.id.section_top_divider)
-        val bottomDivider: View = sectionView.findViewById(R.id.section_bottom_divider)
-        val mainFeedArticleRecyclerView: RecyclerView =
-            sectionView.findViewById(R.id.main_feed_article_list)
+        val mainFeedSectionViewPager: ViewPager2 = sectionView.findViewById(R.id.main_feed_section_pager)
+        val sectionFeaturedArticleTitle: TextView = sectionView.findViewById(R.id.section_featured_article_title)
+        val sectionFeaturedArticleAuthor: TextView = sectionView.findViewById(R.id.section_featured_author)
+        val sectionFeaturedArticleImage: ImageView = sectionView.findViewById(R.id.section_featured_image)
     }
 
     class FeaturedArticleHolder internal constructor(featuredArticleView: View) :
         RecyclerView.ViewHolder(featuredArticleView) {
         val featuredArticleTitle: TextView =
             featuredArticleView.findViewById(R.id.featured_article_title)
+        val featuredArticleImage: ImageView =
+            featuredArticleView.findViewById(R.id.featured_article_image)
+        val featuredArticleAuthor: TextView =
+            featuredArticleView.findViewById(R.id.featured_article_author)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -59,12 +70,12 @@ class MainFeedSectionAdapter :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val section = currentList[position].sectionType
-        Log.i("position", position.toString())
-
         when (holder.itemViewType) {
             -1 -> {
                 val sectionTitle = section.title
                 val posts = currentList[position].posts
+                val topSectionPost = currentList[position].posts[0]
+                val remainingPosts = posts.slice(1 until posts.size)
                 val sectionHolder = holder as SectionHolder
                 sectionHolder.sectionTitle.text = sectionTitle
                 val articleAdapter = MainFeedArticleAdapter()
@@ -72,12 +83,20 @@ class MainFeedSectionAdapter :
                     adapter = articleAdapter
                     layoutManager = LinearLayoutManager(context)
                 }
-                articleAdapter.submitList(posts)
+                sectionHolder.sectionFeaturedArticleTitle.text = topSectionPost.title
+                sectionHolder.sectionFeaturedArticleAuthor.text = context.getString(R.string.byline, topSectionPost.getByline())
+                Picasso.get().load(topSectionPost.getMediumImageUrl()).fit()
+                    .into(sectionHolder.sectionFeaturedArticleImage)
+                articleAdapter.submitList(remainingPosts)
             }
             SectionType.FEATURED.id -> {
                 val post = currentList[position].posts[0]
                 val featuredArticleHolder = holder as FeaturedArticleHolder
                 featuredArticleHolder.featuredArticleTitle.text = post.title
+                featuredArticleHolder.featuredArticleAuthor.text =
+                    context.getString(R.string.byline, post.getByline())
+                Picasso.get().load(post.getMediumImageUrl()).fit()
+                    .into(featuredArticleHolder.featuredArticleImage)
             }
         }
     }
