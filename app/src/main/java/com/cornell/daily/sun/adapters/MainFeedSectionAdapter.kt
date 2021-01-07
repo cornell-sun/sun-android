@@ -25,10 +25,14 @@ class MainFeedSectionAdapter @Inject constructor(@ApplicationContext private val
     class SectionHolder internal constructor(sectionView: View) :
         RecyclerView.ViewHolder(sectionView) {
         val sectionTitle: TextView = sectionView.findViewById(R.id.section_title)
-        val mainFeedSectionViewPager: ViewPager2 = sectionView.findViewById(R.id.main_feed_section_pager)
-        val sectionFeaturedArticleTitle: TextView = sectionView.findViewById(R.id.section_featured_article_title)
-        val sectionFeaturedArticleAuthor: TextView = sectionView.findViewById(R.id.section_featured_author)
-        val sectionFeaturedArticleImage: ImageView = sectionView.findViewById(R.id.section_featured_image)
+        val mainFeedSectionViewPager: ViewPager2 =
+            sectionView.findViewById(R.id.main_feed_section_pager)
+        val sectionFeaturedArticleTitle: TextView =
+            sectionView.findViewById(R.id.section_featured_article_title)
+        val sectionFeaturedArticleAuthor: TextView =
+            sectionView.findViewById(R.id.section_featured_author)
+        val sectionFeaturedArticleImage: ImageView =
+            sectionView.findViewById(R.id.section_featured_image)
     }
 
     class FeaturedArticleHolder internal constructor(featuredArticleView: View) :
@@ -82,7 +86,8 @@ class MainFeedSectionAdapter @Inject constructor(@ApplicationContext private val
                     adapter = sectionPageAdapter
                 }
                 sectionHolder.sectionFeaturedArticleTitle.text = topSectionPost.title
-                sectionHolder.sectionFeaturedArticleAuthor.text = context.getString(R.string.byline, topSectionPost.getByline())
+                sectionHolder.sectionFeaturedArticleAuthor.text =
+                    context.getString(R.string.byline, topSectionPost.getByline())
                 Picasso.get().load(topSectionPost.getMediumImageUrl()).fit()
                     .into(sectionHolder.sectionFeaturedArticleImage)
                 sectionPageAdapter.submitList(remainingPosts.windowed(3, 3, partialWindows = false))

@@ -7,7 +7,10 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class PostsDataSource @Inject constructor(private val service: SunWordpressService, private val sectionType: SectionType? = null) : PagingSource<Int, Post>() {
+class PostsDataSource @Inject constructor(
+    private val service: SunWordpressService,
+    private val sectionType: SectionType? = null
+) : PagingSource<Int, Post>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Post> {
         return try {
             val nextPageNumber = params.key ?: 0

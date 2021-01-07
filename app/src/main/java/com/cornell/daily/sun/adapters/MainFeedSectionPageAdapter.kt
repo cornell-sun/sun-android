@@ -22,7 +22,8 @@ class MainFeedSectionPageAdapter :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val pageView = LayoutInflater.from(parent.context).inflate(R.layout.list_item_main_feed_section_page, parent, false) as View
+        val pageView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.list_item_main_feed_section_page, parent, false) as View
         return PageHolder(pageView)
     }
 
@@ -39,11 +40,17 @@ class MainFeedSectionPageAdapter :
 }
 
 private class PageDiffCallback : DiffUtil.ItemCallback<List<PostInfoDict>>() {
-    override fun areContentsTheSame(oldItem: List<PostInfoDict>, newItem: List<PostInfoDict>): Boolean {
+    override fun areContentsTheSame(
+        oldItem: List<PostInfoDict>,
+        newItem: List<PostInfoDict>
+    ): Boolean {
         return oldItem == newItem
     }
 
-    override fun areItemsTheSame(oldItem: List<PostInfoDict>, newItem: List<PostInfoDict>): Boolean {
+    override fun areItemsTheSame(
+        oldItem: List<PostInfoDict>,
+        newItem: List<PostInfoDict>
+    ): Boolean {
         return oldItem === newItem
     }
 }

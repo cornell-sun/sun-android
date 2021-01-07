@@ -4,14 +4,7 @@ import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.cachedIn
-import com.cornell.daily.sun.api.NetworkingModule
-import com.cornell.daily.sun.api.SunWordpressService
 import com.cornell.daily.sun.data.PostRepository
-import com.cornell.daily.sun.data.PostsDataSource
 import com.cornell.daily.sun.data.Section
 import com.cornell.daily.sun.data.SectionType
 import kotlinx.coroutines.GlobalScope
