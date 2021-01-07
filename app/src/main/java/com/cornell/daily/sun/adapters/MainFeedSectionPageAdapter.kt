@@ -1,22 +1,20 @@
 package com.cornell.daily.sun.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cornell.daily.sun.R
-import com.cornell.daily.sun.data.Post
-import dagger.hilt.android.qualifiers.ApplicationContext
-import javax.inject.Inject
+import com.cornell.daily.sun.data.PostInfoDict
 import javax.inject.Singleton
 
 
 @Singleton
-class MainFeedSectionPageAdapter @Inject constructor(@ApplicationContext private val context: Context) :
-    ListAdapter<List<Post>, RecyclerView.ViewHolder>(PageDiffCallback()) {
+class MainFeedSectionPageAdapter :
+    ListAdapter<List<PostInfoDict>, RecyclerView.ViewHolder>(PageDiffCallback()) {
 
     class PageHolder internal constructor(pageView: View) : RecyclerView.ViewHolder(pageView) {
         val mainFeedArticleRecyclerView: RecyclerView =
@@ -29,16 +27,23 @@ class MainFeedSectionPageAdapter @Inject constructor(@ApplicationContext private
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val articleAdapter = MainFeedArticleAdapter()
+        val pageHolder = holder as PageHolder
+        val page = currentList[position]
+        articleAdapter.submitList(page)
+        pageHolder.mainFeedArticleRecyclerView.apply {
+            adapter = articleAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
     }
 }
 
-private class PageDiffCallback : DiffUtil.ItemCallback<List<Post>>() {
-    override fun areContentsTheSame(oldItem: List<Post>, newItem: List<Post>): Boolean {
-        TODO("Not yet implemented")
+private class PageDiffCallback : DiffUtil.ItemCallback<List<PostInfoDict>>() {
+    override fun areContentsTheSame(oldItem: List<PostInfoDict>, newItem: List<PostInfoDict>): Boolean {
+        return oldItem == newItem
     }
 
-    override fun areItemsTheSame(oldItem: List<Post>, newItem: List<Post>): Boolean {
-        TODO("Not yet implemented")
+    override fun areItemsTheSame(oldItem: List<PostInfoDict>, newItem: List<PostInfoDict>): Boolean {
+        return oldItem === newItem
     }
 }

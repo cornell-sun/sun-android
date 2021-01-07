@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -78,16 +77,15 @@ class MainFeedSectionAdapter @Inject constructor(@ApplicationContext private val
                 val remainingPosts = posts.slice(1 until posts.size)
                 val sectionHolder = holder as SectionHolder
                 sectionHolder.sectionTitle.text = sectionTitle
-                val articleAdapter = MainFeedArticleAdapter()
-                sectionHolder.mainFeedArticleRecyclerView.apply {
-                    adapter = articleAdapter
-                    layoutManager = LinearLayoutManager(context)
+                val sectionPageAdapter = MainFeedSectionPageAdapter()
+                sectionHolder.mainFeedSectionViewPager.apply {
+                    adapter = sectionPageAdapter
                 }
                 sectionHolder.sectionFeaturedArticleTitle.text = topSectionPost.title
                 sectionHolder.sectionFeaturedArticleAuthor.text = context.getString(R.string.byline, topSectionPost.getByline())
                 Picasso.get().load(topSectionPost.getMediumImageUrl()).fit()
                     .into(sectionHolder.sectionFeaturedArticleImage)
-                articleAdapter.submitList(remainingPosts)
+                sectionPageAdapter.submitList(remainingPosts.windowed(3, 3, partialWindows = false))
             }
             SectionType.FEATURED.id -> {
                 val post = currentList[position].posts[0]

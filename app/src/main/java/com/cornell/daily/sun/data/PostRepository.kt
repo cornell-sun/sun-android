@@ -1,10 +1,12 @@
 package com.cornell.daily.sun.data
 
+import android.util.Log
 import com.cornell.daily.sun.api.SunWordpressService
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
+import retrofit2.http.POST
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -26,9 +28,15 @@ class PostRepository @Inject constructor(private val service: SunWordpressServic
             SectionType.values().filter { section -> section != SectionType.FEATURED }
                 .map { section ->
                     GlobalScope.async {
+                        val totalPosts = mutableListOf<PostInfoDict>()
+                        var i = 1
+                        while(totalPosts.size < POSTS_PER_SECTION) {
+                            totalPosts.addAll(service.getPostsBySection(section.id, i).map { post -> post.postInfoDict })
+                            i++
+                        }
                         Section(
                             section,
-                            service.getPostsBySection(section.id, 1).take(POSTS_PER_SECTION)
+                            totalPosts
                         )
                     }
                 }
@@ -36,11 +44,11 @@ class PostRepository @Inject constructor(private val service: SunWordpressServic
         return deferredCalls.awaitAll().toMutableList()
     }
 
-    suspend fun getFeaturedPost(): Post {
-        return service.getFeaturedPost()
+    suspend fun getFeaturedPost(): PostInfoDict {
+        return service.getFeaturedPost().postInfoDict
     }
 
     companion object {
-        const val POSTS_PER_SECTION = 6
+        const val POSTS_PER_SECTION = 11
     }
 }

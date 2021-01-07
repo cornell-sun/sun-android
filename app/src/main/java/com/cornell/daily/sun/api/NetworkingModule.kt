@@ -24,7 +24,6 @@ object NetworkingModule {
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
         val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
-        val sunInterceptor = SunWordpressInterceptor()
-        return OkHttpClient.Builder().addInterceptor(logger).addInterceptor(sunInterceptor).build()
+        return OkHttpClient.Builder().addInterceptor(logger).build()
     }
 }

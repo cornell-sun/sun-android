@@ -9,13 +9,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cornell.daily.sun.R
-import com.cornell.daily.sun.data.Post
+import com.cornell.daily.sun.data.PostInfoDict
 import com.squareup.picasso.Picasso
 import javax.inject.Singleton
 
 @Singleton
 class MainFeedArticleAdapter :
-    ListAdapter<Post, MainFeedArticleAdapter.ArticleHolder>(PostObjectDiffCallback()) {
+    ListAdapter<PostInfoDict, MainFeedArticleAdapter.ArticleHolder>(PostObjectDiffCallback()) {
     class ArticleHolder internal constructor(articleView: View) :
         RecyclerView.ViewHolder(articleView) {
         val articleTitle: TextView = articleView.findViewById(R.id.article_title)
@@ -38,12 +38,12 @@ class MainFeedArticleAdapter :
     }
 }
 
-private class PostObjectDiffCallback : DiffUtil.ItemCallback<Post>() {
-    override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
+private class PostObjectDiffCallback : DiffUtil.ItemCallback<PostInfoDict>() {
+    override fun areItemsTheSame(oldItem: PostInfoDict, newItem: PostInfoDict): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
+    override fun areContentsTheSame(oldItem: PostInfoDict, newItem: PostInfoDict): Boolean {
         return oldItem == newItem
     }
 }
