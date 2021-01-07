@@ -7,5 +7,5 @@
     <fragment
         android:id="@+id/main_feed_fragment"
         android:name="com.cornell.daily.sun.MainFeedFragment"
-        tools:layout="@layout/fragment_main_feed"></fragment>
+        tools:layout="@layout/main_feed_fragment" />
 </navigation>

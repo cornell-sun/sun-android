@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cornell.daily.sun.adapters.MainFeedSectionAdapter
 import com.cornell.daily.sun.viewmodels.MainFeedViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_main_feed.view.*
+import kotlinx.android.synthetic.main.main_feed_fragment.view.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -33,7 +33,7 @@ class MainFeedFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = inflater.inflate(R.layout.fragment_main_feed, container, false)
+        val binding = inflater.inflate(R.layout.main_feed_fragment, container, false)
 
         mainFeedSectionsRecyclerView = binding.main_feed_section_list
         mainFeedSectionLayoutManager = LinearLayoutManager(activity)
