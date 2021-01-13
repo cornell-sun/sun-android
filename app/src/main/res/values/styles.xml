@@ -7,15 +7,4 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="thinDivider">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">1dp</item>
-        <item name="android:background">#F0F0F0</item>
-    </style>
-
-    <style name="thickDivider">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">5dp</item>
-        <item name="android:background">#F0F0F0</item>
-    </style>
 </resources>
