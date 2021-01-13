@@ -1,6 +1,5 @@
 package com.cornell.daily.sun.data
 
-import android.util.Log
 import com.cornell.daily.sun.api.SunWordpressService
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.GlobalScope
@@ -40,7 +39,6 @@ class PostRepository @Inject constructor(private val service: SunWordpressServic
                             totalPosts.addAll(posts)
                             i++
                         }
-                        Log.i("Post Count for ${section.title}", totalPosts.size.toString())
                         Section(
                             section,
                             totalPosts
