@@ -32,7 +32,7 @@ class MainFeedArticleAdapter :
     override fun onBindViewHolder(holder: ArticleHolder, position: Int) {
         val post = currentList[position]
         holder.articleTitle.text = currentList[position].title
-        Picasso.get().load(post.getMediumImageUrl()).fit()
+        Picasso.get().load(post.getMediumImageUrl()).fit().centerCrop()
             .into(holder.articleImageView)
         holder.authorText.text = post.getByline()
     }

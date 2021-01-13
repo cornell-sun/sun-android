@@ -1,6 +1,5 @@
 package com.cornell.daily.sun.viewmodels
 
-import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,19 +25,7 @@ class MainFeedViewModel @ViewModelInject constructor(private val postRepository:
         val sectionPosts = postRepository.getSectionPosts()
         val featuredSection =
             Section(SectionType.FEATURED, mutableListOf((postRepository.getFeaturedPost())))
-        val featuredPostID = featuredSection.posts[0].id
-        sectionPosts.forEach { section ->
-            run {
-                section.filterPosts(featuredPostID)
-                section.clamp(10)
-            }
-        }
-        featuredSection.posts[0].featuredMediaImages?.full?.url?.let { Log.i("Featured: ", it) }
         sectionPosts.add(0, featuredSection)
-        Log.i(
-            "Section Posts Size", sectionPosts.size
-                .toString()
-        )
         sections.postValue(sectionPosts)
     }
 }

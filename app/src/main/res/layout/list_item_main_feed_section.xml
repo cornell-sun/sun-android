@@ -51,7 +51,7 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:textAllCaps="true"
-        android:textColor="@color/bylineText"
+        android:textColor="@color/darkGrey"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -65,7 +65,15 @@
         android:id="@+id/main_feed_section_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/section_featured_image" />
+        app:layout_constraintTop_toBottomOf="@id/section_featured_image"/>
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/main_feed_section_pager_tab_layout"
+        app:tabBackground="@drawable/tab_selector"
+        app:tabGravity="center"
+        app:tabIndicatorHeight="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/main_feed_section_pager"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

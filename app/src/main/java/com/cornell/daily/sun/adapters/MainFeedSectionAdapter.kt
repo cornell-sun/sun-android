@@ -13,6 +13,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.cornell.daily.sun.R
 import com.cornell.daily.sun.data.Section
 import com.cornell.daily.sun.data.SectionType
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
@@ -25,6 +27,8 @@ class MainFeedSectionAdapter @Inject constructor(@ApplicationContext private val
     class SectionHolder internal constructor(sectionView: View) :
         RecyclerView.ViewHolder(sectionView) {
         val sectionTitle: TextView = sectionView.findViewById(R.id.section_title)
+        val mainFeedSectionPagerTabLayout: TabLayout =
+            sectionView.findViewById(R.id.main_feed_section_pager_tab_layout)
         val mainFeedSectionViewPager: ViewPager2 =
             sectionView.findViewById(R.id.main_feed_section_pager)
         val sectionFeaturedArticleTitle: TextView =
@@ -85,10 +89,18 @@ class MainFeedSectionAdapter @Inject constructor(@ApplicationContext private val
                 sectionHolder.mainFeedSectionViewPager.apply {
                     adapter = sectionPageAdapter
                 }
+                TabLayoutMediator(
+                    sectionHolder.mainFeedSectionPagerTabLayout,
+                    sectionHolder.mainFeedSectionViewPager
+                ) { tab, _ ->
+                    run {
+                        tab.view.isClickable = false
+                    }
+                }.attach()
                 sectionHolder.sectionFeaturedArticleTitle.text = topSectionPost.title
                 sectionHolder.sectionFeaturedArticleAuthor.text =
                     context.getString(R.string.byline, topSectionPost.getByline())
-                Picasso.get().load(topSectionPost.getMediumImageUrl()).fit()
+                Picasso.get().load(topSectionPost.getMediumImageUrl()).fit().centerCrop()
                     .into(sectionHolder.sectionFeaturedArticleImage)
                 sectionPageAdapter.submitList(remainingPosts.windowed(3, 3, partialWindows = false))
             }
@@ -98,7 +110,7 @@ class MainFeedSectionAdapter @Inject constructor(@ApplicationContext private val
                 featuredArticleHolder.featuredArticleTitle.text = post.title
                 featuredArticleHolder.featuredArticleAuthor.text =
                     context.getString(R.string.byline, post.getByline())
-                Picasso.get().load(post.getMediumImageUrl()).fit()
+                Picasso.get().load(post.getMediumImageUrl()).fit().centerCrop()
                     .into(featuredArticleHolder.featuredArticleImage)
             }
         }
