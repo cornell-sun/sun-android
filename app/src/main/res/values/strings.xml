@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Cornell Sun</string>
     <string name="app_heading">The Cornell Daily Sun</string>
+    <string name="byline">By %1$s</string>
 </resources>
