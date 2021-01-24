@@ -4,8 +4,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/main_feed_swipe_container"
         app:layout_constraintTop_toTopOf="parent"
@@ -18,7 +16,6 @@
             android:id="@+id/main_feed_section_list"
             android:layout_height="wrap_content"
             tools:listitem="@layout/list_item_main_feed_section"
-            android:paddingBottom="60dp"
             android:layout_width="match_parent" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
