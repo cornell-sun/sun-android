@@ -12,16 +12,28 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:id="@+id/app_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/sonnenstrahl_ausgezeichnet"
+                android:layout_gravity="center"
+                android:text="@string/app_heading"
+                android:textColor="@color/black"
+                android:textSize="32sp" />
 
-        <TextView
-            android:id="@+id/app_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/sonnenstrahl_ausgezeichnet"
-            android:layout_gravity="center"
-            android:text="@string/app_heading"
-            android:textColor="@color/black"
-            android:textSize="32sp" />
+            <ImageView
+                android:id="@+id/app_header_search"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="end"
+                app:layout_constraintLeft_toRightOf="@id/app_header"
+                android:src="@drawable/search_icon_light"
+                android:background="@drawable/search_icon_background_light"
+                android:scaleType="fitCenter"
+                android:padding="8dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp" />
     </androidx.appcompat.widget.Toolbar>
 
     <View
