@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/main_feed_fragment"
+        android:icon="@drawable/bottom_nav_feed_icon_selector"
+        android:enabled="true"
+        android:title="Feed" />
+
+    <item
+        android:id="@+id/sections"
+        android:icon="@drawable/bottom_nav_sections_icon_selector"
+        android:enabled="true"
+        android:title="Sections" />
+
+    <item
+        android:id="@+id/for_you"
+        android:icon="@drawable/bottom_nav_for_you_icon_selector"
+        android:enabled="true"
+        android:title="For You" />
+
+    <item
+        android:id="@+id/bookmark"
+        android:icon="@drawable/bottom_nav_bookmark_icon_selector"
+        android:enabled="true"
+        android:title="Bookmark" />
+
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/bottom_nav_settings_icon_selector"
+        android:enabled="true"
+        android:title="Settings" />
+</menu>

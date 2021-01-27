@@ -4,23 +4,9 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
-    <TextView
-        android:id="@+id/main_feed_header"
-        android:layout_width="match_parent"
-        android:background="@color/white"
-        android:layout_height="60dp"
-        android:fontFamily="@font/sonnenstrahl_ausgezeichnet"
-        android:gravity="center"
-        android:text="@string/app_heading"
-        android:textColor="@color/black"
-        android:textSize="32sp"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/main_feed_swipe_container"
-        app:layout_constraintTop_toBottomOf="@id/main_feed_header"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_width="0sp"
@@ -30,7 +16,6 @@
             android:id="@+id/main_feed_section_list"
             android:layout_height="wrap_content"
             tools:listitem="@layout/list_item_main_feed_section"
-            android:paddingBottom="60dp"
             android:layout_width="match_parent" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
