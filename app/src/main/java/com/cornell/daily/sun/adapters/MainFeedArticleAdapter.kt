@@ -5,17 +5,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cornell.daily.sun.R
 import com.cornell.daily.sun.data.PostInfoDict
 import com.squareup.picasso.Picasso
-import javax.inject.Singleton
 
-@Singleton
 class MainFeedArticleAdapter :
     ListAdapter<PostInfoDict, MainFeedArticleAdapter.ArticleHolder>(PostObjectDiffCallback()) {
+
     class ArticleHolder internal constructor(articleView: View) :
         RecyclerView.ViewHolder(articleView) {
         val articleTitle: TextView = articleView.findViewById(R.id.article_title)
@@ -35,7 +35,11 @@ class MainFeedArticleAdapter :
         Picasso.get().load(post.getMediumImageUrl()).fit().centerCrop()
             .into(holder.articleImageView)
         holder.authorText.text = post.getByline()
+        holder.itemView.setOnClickListener { view ->
+            view.findNavController().navigate(R.id.main_feed_to_post)
+        }
     }
+
 }
 
 private class PostObjectDiffCallback : DiffUtil.ItemCallback<PostInfoDict>() {

@@ -9,10 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cornell.daily.sun.R
 import com.cornell.daily.sun.data.PostInfoDict
-import javax.inject.Singleton
 
-
-@Singleton
 class MainFeedSectionPageAdapter :
     ListAdapter<List<PostInfoDict>, RecyclerView.ViewHolder>(PageDiffCallback()) {
 

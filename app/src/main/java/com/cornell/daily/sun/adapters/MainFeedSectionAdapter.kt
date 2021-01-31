@@ -16,12 +16,8 @@ import com.cornell.daily.sun.data.SectionType
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.squareup.picasso.Picasso
-import dagger.hilt.android.qualifiers.ApplicationContext
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class MainFeedSectionAdapter @Inject constructor(@ApplicationContext private val context: Context) :
+class MainFeedSectionAdapter constructor(private val context: Context?) :
     ListAdapter<Section, RecyclerView.ViewHolder>(PostObjectListDiffCallback()) {
 
     class SectionHolder internal constructor(sectionView: View) :
@@ -99,7 +95,7 @@ class MainFeedSectionAdapter @Inject constructor(@ApplicationContext private val
                 }.attach()
                 sectionHolder.sectionFeaturedArticleTitle.text = topSectionPost.title
                 sectionHolder.sectionFeaturedArticleAuthor.text =
-                    context.getString(R.string.byline, topSectionPost.getByline())
+                    context?.getString(R.string.byline, topSectionPost.getByline())
                 Picasso.get().load(topSectionPost.getMediumImageUrl()).fit().centerCrop()
                     .into(sectionHolder.sectionFeaturedArticleImage)
                 sectionPageAdapter.submitList(remainingPosts.windowed(3, 3, partialWindows = false))
@@ -109,7 +105,7 @@ class MainFeedSectionAdapter @Inject constructor(@ApplicationContext private val
                 val featuredArticleHolder = holder as FeaturedArticleHolder
                 featuredArticleHolder.featuredArticleTitle.text = post.title
                 featuredArticleHolder.featuredArticleAuthor.text =
-                    context.getString(R.string.byline, post.getByline())
+                    context?.getString(R.string.byline, post.getByline())
                 Picasso.get().load(post.getMediumImageUrl()).fit().centerCrop()
                     .into(featuredArticleHolder.featuredArticleImage)
             }

@@ -11,6 +11,7 @@ data class PostInfoDict(
     val didSave: Boolean?,
     val id: Int,
     val title: String?,
+    @SerializedName(value = "post_content_no_srcset")
     val content: String?,
     val excerpt: String?,
     val link: String?,

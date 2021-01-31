@@ -5,8 +5,6 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
-import javax.inject.Inject
-import javax.inject.Singleton
 
 enum class SectionType(val id: Int, val title: String) {
     FEATURED(1, "Featured"),
@@ -19,8 +17,7 @@ enum class SectionType(val id: Int, val title: String) {
     MULTIMEDIA(8, "Multimedia");
 }
 
-@Singleton
-class PostRepository @Inject constructor(private val service: SunWordpressService) {
+class PostRepository constructor(private val service: SunWordpressService) {
     suspend fun getSectionPosts(): MutableList<Section> {
         val featuredPostID = getFeaturedPost().id
         val deferredCalls: List<Deferred<Section>> =
