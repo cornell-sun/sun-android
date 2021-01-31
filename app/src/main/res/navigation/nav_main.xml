@@ -9,6 +9,6 @@
         tools:layout="@layout/main_feed_fragment" />
     <fragment
         android:id="@+id/sections_fragment"
-        android:name="com.cornell.daily.sun.MainFeedFragment"
-        tools:layout="@layout/main_feed_fragment" />
+        android:name="com.cornell.daily.sun.SectionsFragment"
+        tools:layout="@layout/sections" />
 </navigation>
