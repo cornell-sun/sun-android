@@ -9,4 +9,5 @@
     <color name="crimson">#B41A19</color>
     <color name="lightGrey">#C4C4C4</color>
     <color name="transparent">#00ff0000</color>
+    <color name="border">#B9B4B4</color>
 </resources>

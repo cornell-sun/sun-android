@@ -7,7 +7,7 @@
         android:title="Feed" />
 
     <item
-        android:id="@+id/sections"
+        android:id="@+id/sections_fragment"
         android:icon="@drawable/bottom_nav_sections_icon_selector"
         android:enabled="true"
         android:title="Sections" />
