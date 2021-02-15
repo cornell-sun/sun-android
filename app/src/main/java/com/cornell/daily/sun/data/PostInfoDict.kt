@@ -1,14 +1,16 @@
 package com.cornell.daily.sun.data
 
 import com.google.gson.annotations.SerializedName
-import java.util.*
+import com.google.gson.internal.bind.util.ISO8601Utils
+import java.text.ParsePosition
 
 /**
  * Data class representing a Daily Sun news article
  */
 data class PostInfoDict(
-    val storeDate: Date?,
+    val date: String?,
     val didSave: Boolean?,
+    @SerializedName(value = "id", alternate = ["post_id"])
     val id: Int,
     val title: String?,
     @SerializedName(value = "post_content_no_srcset")
@@ -17,13 +19,18 @@ data class PostInfoDict(
     val link: String?,
     @SerializedName(value = "author_dict")
     val authors: List<Author>?,
-    @SerializedName(value = "featured_media_url_string")
+    @SerializedName(value = "featured_media_url_string", alternate = ["featured_media"])
     val featuredMediaImages: Images?,
+    @SerializedName(value = "featured_media_caption")
     val featuredMediaCaption: String?,
+    @SerializedName(value = "featured_media_credit")
     val featuredMediaCredit: String?,
     val categories: List<String>?,
+    @SerializedName(value = "primary_category")
     val primaryCategory: String?,
     val tags: List<String>,
+    @SerializedName(value = "suggested_article_ids")
+    val suggestedPosts: List<PostInfoDict>,
     val postAttachments: List<PostAttachmentObject>,
     val postType: PostType?
 ) {
@@ -45,5 +52,11 @@ data class PostInfoDict(
      */
     fun getMediumImageUrl(): String? {
         return featuredMediaImages?.mediumLarge?.url
+    }
+
+    fun getFormattedDate(): String {
+        val fixedISODate = "$date-05:00"
+        val date = ISO8601Utils.parse(fixedISODate, ParsePosition(0))
+        return String.format("%1\$tB %1\$td, %1\$tY", date)
     }
 }

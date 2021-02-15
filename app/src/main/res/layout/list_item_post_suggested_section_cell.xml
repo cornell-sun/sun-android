@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/suggested_post_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_min="95dp"
+        app:layout_constraintHeight_max="110dp"
+        app:layout_constraintWidth_min="95dp" />
+    <TextView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/suggested_post_image"
+        android:id="@+id/suggested_post_title"
+        android:layout_width="0sp"
+        android:layout_height="wrap_content" />
+    <TextView
+        app:layout_constraintTop_toBottomOf="@id/suggested_post_title"
+        app:layout_constraintLeft_toRightOf="@id/suggested_post_image"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/suggested_post_author"
+        android:layout_width="0sp"
+        android:layout_height="wrap_content" />
+</androidx.constraintlayout.widget.ConstraintLayout>

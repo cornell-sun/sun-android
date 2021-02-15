@@ -7,15 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cornell.daily.sun.adapters.MainFeedSectionAdapter
 import com.cornell.daily.sun.util.InjectorUtils
 import com.cornell.daily.sun.viewmodels.MainFeedViewModel
 import com.cornell.daily.sun.viewmodels.PostViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.main_feed_fragment.view.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -37,8 +35,7 @@ class MainFeedFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = inflater.inflate(R.layout.main_feed_fragment, container, false)
-
-        mainFeedSectionAdapter = MainFeedSectionAdapter(context)
+        mainFeedSectionAdapter = MainFeedSectionAdapter(context, postViewModel::selectPost)
         mainFeedSectionsRecyclerView = binding.main_feed_section_list
         mainFeedSectionLayoutManager = LinearLayoutManager(activity)
 
@@ -51,6 +48,13 @@ class MainFeedFragment : Fragment() {
             mainFeedSectionAdapter.submitList(sections)
         }
 
+        postViewModel.selectedPost.observe(viewLifecycleOwner) {
+            if (it != null) {
+                findNavController().navigate(R.id.main_feed_to_post)
+            }
+        }
+
+
         binding.main_feed_swipe_container.setOnRefreshListener {
             GlobalScope.launch {
                 mainFeedViewModel.loadSections()
@@ -59,13 +63,5 @@ class MainFeedFragment : Fragment() {
         }
 
         return binding
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val navController = view.findNavController()
-        val bottomNavigationView = view.findViewById<BottomNavigationView>(R.id.bottom_nav_view)
-        bottomNavigationView?.setupWithNavController(navController)
-        bottomNavigationView?.itemIconTintList = null
     }
 }
