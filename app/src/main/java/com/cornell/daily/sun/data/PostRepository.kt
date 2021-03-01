@@ -49,6 +49,10 @@ class PostRepository constructor(private val service: SunWordpressService) {
         return service.getFeaturedPost().postInfoDict
     }
 
+    suspend fun getPost(id: Int): PostInfoDict {
+        return service.getPostById(id).postInfoDict
+    }
+
     companion object {
         const val POSTS_PER_SECTION = 10
     }

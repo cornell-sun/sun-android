@@ -11,8 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cornell.daily.sun.R
 import com.cornell.daily.sun.data.PostInfoDict
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlin.reflect.KSuspendFunction1
 
-class PostSuggestedSectionAdapter(private val context: Context?) :
+class PostSuggestedSectionAdapter(
+    private val context: Context?,
+    private val loadPost: KSuspendFunction1<Int, Unit>
+) :
     ListAdapter<PostInfoDict, PostSuggestedSectionAdapter.SuggestedPostHolder>(
         PostInfoDictDiffCallback()
     ) {
@@ -41,6 +47,10 @@ class PostSuggestedSectionAdapter(private val context: Context?) :
             context?.getString(R.string.byline, currentSuggestedPost.getByline())
         Picasso.get().load(currentSuggestedPost.getMediumImageUrl()).fit().centerCrop()
             .into(holder.suggestedPostImage)
-
+        holder.itemView.setOnClickListener {
+            GlobalScope.launch {
+                loadPost(currentSuggestedPost.id)
+            }
+        }
     }
 }

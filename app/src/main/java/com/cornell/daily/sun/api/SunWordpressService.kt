@@ -13,7 +13,7 @@ import retrofit2.http.Query
 
 interface SunWordpressService {
     @GET("wp/v2/posts/{postId}")
-    fun getPostById(@Path("postId") postId: Int): Call<PostInfoDict?>?
+    suspend fun getPostById(@Path("postId") postId: Int): Post
 
     @GET("wp/v2/posts")
     fun getPostsById(@Query("page") page: Int): Call<List<PostInfoDict?>?>?

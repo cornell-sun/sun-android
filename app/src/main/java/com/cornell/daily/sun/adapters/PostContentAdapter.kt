@@ -14,8 +14,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cornell.daily.sun.R
 import com.cornell.daily.sun.data.*
 import com.squareup.picasso.Picasso
+import kotlin.reflect.KSuspendFunction1
 
-class PostContentAdapter(private val context: Context?) :
+class PostContentAdapter(
+    private val context: Context?,
+    private val loadPost: KSuspendFunction1<Int, Unit>
+) :
     ListAdapter<PostContent, RecyclerView.ViewHolder>(PostContentDiffCallback()) {
 
     class ParagraphHolder internal constructor(paragraphView: View) :
@@ -94,7 +98,7 @@ class PostContentAdapter(private val context: Context?) :
             }
             is SuggestedPosts -> {
                 val suggestedPostsHolder = holder as SuggestedPostsHolder
-                val suggestedSectionAdapter = PostSuggestedSectionAdapter(context)
+                val suggestedSectionAdapter = PostSuggestedSectionAdapter(context, loadPost)
                 suggestedSectionAdapter.submitList(currentPostContent.posts)
                 suggestedPostsHolder.suggestedPostsRecyclerView.apply {
                     adapter = suggestedSectionAdapter

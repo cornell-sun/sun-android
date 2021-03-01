@@ -12,8 +12,6 @@ import com.cornell.daily.sun.viewmodels.PostViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
-    private val postViewModel: PostViewModel by viewModels()
-
     lateinit var navHostFragment: NavHostFragment
     lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,9 +30,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        postViewModel.selectPost(null)
-        navController.popBackStack()
-        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
         return super.onOptionsItemSelected(item)
     }
 

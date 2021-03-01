@@ -1,15 +1,20 @@
 package com.cornell.daily.sun
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cornell.daily.sun.adapters.PostContentAdapter
 import com.cornell.daily.sun.data.*
+import com.cornell.daily.sun.util.InjectorUtils
 import com.cornell.daily.sun.viewmodels.PostViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.post_fragment.view.*
@@ -23,7 +28,7 @@ class PostFragment : Fragment() {
 
     private lateinit var postContentLayoutManager: LinearLayoutManager
 
-    private val postViewModel: PostViewModel by activityViewModels()
+    private val postViewModel: PostViewModel by activityViewModels { InjectorUtils.provideMainFeeViewModelFactory() }
 
     private lateinit var post: PostInfoDict
 
@@ -34,11 +39,32 @@ class PostFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = inflater.inflate(R.layout.post_fragment, container, false)
-        post = postViewModel.selectedPost.value!!
-        postContentAdapter = PostContentAdapter(context)
+        setHasOptionsMenu(true);
+        postContentAdapter = PostContentAdapter(context, postViewModel::loadPost)
         postContentRecyclerView = binding.post_view_content
         postContentRecyclerView.setHasFixedSize(true)
         postContentLayoutManager = LinearLayoutManager(activity)
+        setAdapterContent()
+        postContentRecyclerView.apply {
+            layoutManager = postContentLayoutManager
+            adapter = postContentAdapter
+        }
+
+        postViewModel.postStack.observe(viewLifecycleOwner) {
+            if (!it.isEmpty()) {
+                setAdapterContent()
+            }
+        }
+
+        val bottomNavigationView =
+            activity?.findViewById<BottomNavigationView>(R.id.bottom_nav_view)
+        bottomNavigationView?.visibility = View.GONE
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        return binding
+    }
+
+    private fun setAdapterContent() {
+        post = postViewModel.postStack.value?.first()!!
         val postContent = post.content?.let { parseHtml(it) }
         postContent?.add(
             0,
@@ -54,15 +80,15 @@ class PostFragment : Fragment() {
         )
         postContent?.add(SuggestedPosts(post.suggestedPosts))
         postContentAdapter.submitList(postContent)
-        postContentRecyclerView.apply {
-            layoutManager = postContentLayoutManager
-            adapter = postContentAdapter
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        postViewModel.popPost()
+        if (postViewModel.postStack.value?.isEmpty() == true) {
+            findNavController().popBackStack()
+            (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
         }
-        val bottomNavigationView =
-            activity?.findViewById<BottomNavigationView>(R.id.bottom_nav_view)
-        bottomNavigationView?.visibility = View.GONE
-        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        return binding
+        return super.onOptionsItemSelected(item)
     }
 
     private fun parseHtml(text: String): MutableList<PostContent> {

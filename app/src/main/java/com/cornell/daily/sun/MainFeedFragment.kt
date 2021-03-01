@@ -1,6 +1,7 @@
 package com.cornell.daily.sun
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +22,7 @@ import kotlinx.coroutines.launch
 class MainFeedFragment : Fragment() {
     private val mainFeedViewModel: MainFeedViewModel by viewModels { InjectorUtils.provideMainFeeViewModelFactory() }
 
-    private val postViewModel: PostViewModel by activityViewModels()
+    private val postViewModel: PostViewModel by activityViewModels { InjectorUtils.provideMainFeeViewModelFactory() }
 
     private lateinit var mainFeedSectionsRecyclerView: RecyclerView
 
@@ -35,7 +36,8 @@ class MainFeedFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = inflater.inflate(R.layout.main_feed_fragment, container, false)
-        mainFeedSectionAdapter = MainFeedSectionAdapter(context, postViewModel::selectPost)
+        mainFeedSectionAdapter =
+            MainFeedSectionAdapter(context, postViewModel::pushPost)
         mainFeedSectionsRecyclerView = binding.main_feed_section_list
         mainFeedSectionLayoutManager = LinearLayoutManager(activity)
 
@@ -48,8 +50,8 @@ class MainFeedFragment : Fragment() {
             mainFeedSectionAdapter.submitList(sections)
         }
 
-        postViewModel.selectedPost.observe(viewLifecycleOwner) {
-            if (it != null) {
+        postViewModel.postStack.observe(viewLifecycleOwner) {
+            if (!it.isEmpty()) {
                 findNavController().navigate(R.id.main_feed_to_post)
             }
         }
