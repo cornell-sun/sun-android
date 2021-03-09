@@ -10,7 +10,6 @@ data class PostMeta(
     val author: String?,
     val date: String?
 ) : PostContent()
-
 data class Paragraph(val text: String) : PostContent()
 data class Image(val url: String) : PostContent()
 data class ImageCredit(val text: String) : PostContent()

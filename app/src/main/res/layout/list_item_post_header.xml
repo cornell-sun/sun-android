@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:layout_marginTop="18.5sp"
+    android:layout_marginBottom="16sp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content">
 
@@ -8,41 +10,74 @@
         android:id="@+id/post_view_section"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="16sp"
+        android:textAllCaps="true"
+        android:paddingLeft="16sp"
+        android:paddingRight="16sp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/darkGrey" />
 
     <TextView
         android:id="@+id/post_view_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12sp"
+        android:paddingLeft="16sp"
+        android:paddingRight="16sp"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/post_view_section" />
 
     <ImageView
         android:id="@+id/post_view_image"
         android:layout_width="match_parent"
         android:layout_height="250dp"
+        android:layout_marginTop="10.5sp"
         app:layout_constraintTop_toBottomOf="@id/post_view_title" />
 
     <TextView
         android:id="@+id/post_view_image_caption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/post_view_image" />
+        android:textColor="@color/black"
+        android:paddingRight="16sp"
+        android:paddingLeft="16sp"
+        app:layout_constraintTop_toBottomOf="@id/post_view_image"
+         />
 
     <TextView
         android:id="@+id/post_view_image_credit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/post_view_image_caption" />
+        android:textColor="@color/darkGrey"
+        android:paddingRight="16sp"
+        android:paddingLeft="16sp"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/post_view_image_caption"
+         />
 
     <TextView
         android:id="@+id/post_view_author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/post_view_image_credit" />
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:layout_marginTop="18sp"
+        android:paddingRight="16sp"
+        android:paddingLeft="16sp"
+        app:layout_constraintTop_toBottomOf="@id/post_view_image_credit"
+         />
 
     <TextView
         android:id="@+id/post_view_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/post_view_author" />
+        android:textColor="@color/darkGrey"
+        android:paddingRight="16sp"
+        android:paddingLeft="16sp"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/post_view_author"
+         />
 </androidx.constraintlayout.widget.ConstraintLayout>

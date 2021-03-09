@@ -32,6 +32,8 @@ class PostFragment : Fragment() {
 
     private lateinit var post: PostInfoDict
 
+    private lateinit var bottomNavigationView: BottomNavigationView
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,9 +58,9 @@ class PostFragment : Fragment() {
             }
         }
 
-        val bottomNavigationView =
-            activity?.findViewById<BottomNavigationView>(R.id.bottom_nav_view)
-        bottomNavigationView?.visibility = View.GONE
+        bottomNavigationView =
+            activity?.findViewById(R.id.bottom_nav_view)!!
+        bottomNavigationView.visibility = View.GONE
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         return binding
     }
@@ -87,6 +89,7 @@ class PostFragment : Fragment() {
         if (postViewModel.postStack.value?.isEmpty() == true) {
             findNavController().popBackStack()
             (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+            bottomNavigationView.visibility = View.VISIBLE
         }
         return super.onOptionsItemSelected(item)
     }

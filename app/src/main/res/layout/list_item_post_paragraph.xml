@@ -8,5 +8,9 @@
         android:id="@+id/post_paragraph_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:paddingLeft="16sp"
+        android:paddingRight="16sp"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

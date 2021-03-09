@@ -6,17 +6,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 
-enum class SectionType(val id: Int, val title: String) {
-    FEATURED(1, "Featured"),
-    NEWS(2, "News"),
-    OPINION(3, "Opinion"),
-    SPORTS(4, "Sports"),
-    ARTS(5, "Arts"),
-    SCIENCE(6, "Science"),
-    DINING(7, "Dining"),
-    MULTIMEDIA(8, "Multimedia");
-}
-
 class PostRepository constructor(private val service: SunWordpressService) {
     suspend fun getSectionPosts(): MutableList<Section> {
         val featuredPostID = getFeaturedPost().id
