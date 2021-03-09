@@ -43,8 +43,7 @@
         android:textColor="@color/black"
         android:paddingRight="16sp"
         android:paddingLeft="16sp"
-        app:layout_constraintTop_toBottomOf="@id/post_view_image"
-         />
+        app:layout_constraintTop_toBottomOf="@id/post_view_image" />
 
     <TextView
         android:id="@+id/post_view_image_credit"
@@ -54,8 +53,7 @@
         android:paddingRight="16sp"
         android:paddingLeft="16sp"
         android:textSize="12sp"
-        app:layout_constraintTop_toBottomOf="@id/post_view_image_caption"
-         />
+        app:layout_constraintTop_toBottomOf="@id/post_view_image_caption" />
 
     <TextView
         android:id="@+id/post_view_author"
@@ -67,8 +65,7 @@
         android:layout_marginTop="18sp"
         android:paddingRight="16sp"
         android:paddingLeft="16sp"
-        app:layout_constraintTop_toBottomOf="@id/post_view_image_credit"
-         />
+        app:layout_constraintTop_toBottomOf="@id/post_view_image_credit" />
 
     <TextView
         android:id="@+id/post_view_date"
@@ -78,6 +75,5 @@
         android:paddingRight="16sp"
         android:paddingLeft="16sp"
         android:textSize="12sp"
-        app:layout_constraintTop_toBottomOf="@id/post_view_author"
-         />
+        app:layout_constraintTop_toBottomOf="@id/post_view_author" />
 </androidx.constraintlayout.widget.ConstraintLayout>

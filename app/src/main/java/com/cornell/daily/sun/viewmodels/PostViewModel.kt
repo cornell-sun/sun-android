@@ -5,18 +5,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.cornell.daily.sun.data.PostInfoDict
 import com.cornell.daily.sun.data.PostRepository
-import kotlin.collections.ArrayDeque
 
 class PostViewModel(private val postRepository: PostRepository) : ViewModel() {
 
-    private val mutablePostStack = MutableLiveData<ArrayDeque<PostInfoDict>>().apply { value = ArrayDeque() }
+    private val mutablePostStack =
+        MutableLiveData<ArrayDeque<PostInfoDict>>().apply { value = ArrayDeque() }
     val postStack: LiveData<ArrayDeque<PostInfoDict>> get() = mutablePostStack
 
     fun pushPost(post: PostInfoDict) {
-            val clonedStack: ArrayDeque<PostInfoDict> = ArrayDeque()
-            mutablePostStack.value?.toList()?.let { clonedStack.addAll(it) }
-            clonedStack.addFirst(post)
-            mutablePostStack.postValue(clonedStack)
+        val clonedStack: ArrayDeque<PostInfoDict> = ArrayDeque()
+        mutablePostStack.value?.toList()?.let { clonedStack.addAll(it) }
+        clonedStack.addFirst(post)
+        mutablePostStack.postValue(clonedStack)
     }
 
     fun popPost(): PostInfoDict {

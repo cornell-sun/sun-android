@@ -9,7 +9,7 @@
     android:layout_marginRight="15dp"
     android:layout_marginLeft="15dp"
     android:clickable="true"
-    >
+    android:focusable="true">
 
     <TextView
         android:id="@+id/text_view"

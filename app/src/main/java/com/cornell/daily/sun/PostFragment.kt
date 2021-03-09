@@ -1,7 +1,6 @@
 package com.cornell.daily.sun
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -41,7 +40,7 @@ class PostFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = inflater.inflate(R.layout.post_fragment, container, false)
-        setHasOptionsMenu(true);
+        setHasOptionsMenu(true)
         postContentAdapter = PostContentAdapter(context, postViewModel::loadPost)
         postContentRecyclerView = binding.post_view_content
         postContentRecyclerView.setHasFixedSize(true)
@@ -125,6 +124,14 @@ class PostFragment : Fragment() {
                         sections[sections.size - 2] = sections[sections.size - 1]
                         sections[sections.size - 1] = tempSection
                     }
+                }
+                "aside" -> {
+                    val blockQuote = parseAsideNode(element)
+                    if (blockQuote != null) sections.add(blockQuote)
+                }
+                "h2" -> {
+                    val heading = parseHeadingNode(element)
+                    sections.add(heading)
                 }
             }
         }

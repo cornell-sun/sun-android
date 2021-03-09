@@ -17,8 +17,8 @@ class SectionsAdapter(
 ) : RecyclerView.Adapter<SectionsAdapter.ViewHolder>() {
 
     class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val icon : ImageView = itemView.findViewById(R.id.icon)
-        val textView : TextView = itemView.findViewById(R.id.text_view)
+        val icon: ImageView = itemView.findViewById(R.id.icon)
+        val textView: TextView = itemView.findViewById(R.id.text_view)
     }
 
     private val imageViewHeightRatioBig = 78.0 / 100.0

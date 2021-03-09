@@ -47,7 +47,7 @@ class PostContentAdapter(
     }
 
     class InlineImageHolder internal constructor(inlineImageView: View) :
-    RecyclerView.ViewHolder(inlineImageView) {
+        RecyclerView.ViewHolder(inlineImageView) {
         val postInlineImage: ImageView = inlineImageView.findViewById(R.id.post_view_inline_image)
     }
 
@@ -56,7 +56,11 @@ class PostContentAdapter(
             is PostMeta -> 0
             is Paragraph -> 1
             is Image -> 2
-            else -> -1
+            is SuggestedPosts -> 3
+            is Caption -> 4
+            is Heading -> 5
+            is Blockquote -> 6
+            is ImageCredit -> 7
         }
     }
 
@@ -70,11 +74,31 @@ class PostContentAdapter(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.list_item_post_paragraph, parent, false) as View
             )
-            2 -> InlineImageHolder(LayoutInflater.from(parent.context).inflate(R.layout.list_item_post_inline_image, parent, false) as View)
-            else -> SuggestedPostsHolder(
+            2 -> InlineImageHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.list_item_post_inline_image, parent, false) as View
+            )
+            3 -> SuggestedPostsHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.list_item_post_suggested_section, parent, false) as View
             )
+            4 -> ParagraphHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.list_item_post_paragraph, parent, false) as View
+            )
+            5 -> ParagraphHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.list_item_post_paragraph, parent, false) as View
+            )
+            6 -> ParagraphHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.list_item_post_paragraph, parent, false) as View
+            )
+            7 -> ParagraphHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.list_item_post_paragraph, parent, false) as View
+            )
+            else -> throw Exception("Invalid View Type in PostContentAdapter")
         }
     }
 
@@ -108,7 +132,8 @@ class PostContentAdapter(
             }
             is Image -> {
                 val inlineImageHolder = holder as InlineImageHolder
-                Picasso.get().load(currentPostContent.url).fit().centerInside().into(inlineImageHolder.postInlineImage)
+                Picasso.get().load(currentPostContent.url).fit().centerInside()
+                    .into(inlineImageHolder.postInlineImage)
             }
             else -> {
             }
