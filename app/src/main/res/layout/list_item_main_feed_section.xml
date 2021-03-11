@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -21,7 +22,9 @@
         android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@id/section_top_divider"
         android:textSize="16sp"
-        android:textAllCaps="true" />
+        android:textAllCaps="true"
+        android:paddingStart="20dp"
+        tools:ignore="RtlSymmetry" />
 
     <View
         android:id="@+id/section_bottom_divider"
@@ -31,7 +34,7 @@
         style="@style/thinDivider" />
 
     <TextView
-        android:id="@+id/section_featured_article_title"
+        android:id="@+id/section_featured_post_title"
         android:textStyle="bold"
         android:textSize="21sp"
         android:textColor="@color/black"
@@ -43,8 +46,8 @@
         android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/section_featured_author"
-        app:layout_constraintTop_toBottomOf="@id/section_featured_article_title"
+        android:id="@+id/section_featured_post_author"
+        app:layout_constraintTop_toBottomOf="@id/section_featured_post_title"
         android:textSize="12sp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
@@ -56,8 +59,8 @@
         android:layout_height="wrap_content" />
 
     <ImageView
-        android:id="@+id/section_featured_image"
-        app:layout_constraintTop_toBottomOf="@id/section_featured_author"
+        android:id="@+id/section_featured_post_image"
+        app:layout_constraintTop_toBottomOf="@id/section_featured_post_author"
         android:layout_width="match_parent"
         android:layout_height="250sp" />
 
@@ -65,7 +68,7 @@
         android:id="@+id/main_feed_section_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/section_featured_image" />
+        app:layout_constraintTop_toBottomOf="@id/section_featured_post_image" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/main_feed_section_pager_tab_layout"

@@ -2,14 +2,18 @@ package com.cornell.daily.sun.api
 
 import com.cornell.daily.sun.data.Post
 import com.cornell.daily.sun.data.PostInfoDict
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface SunWordpressService {
     @GET("wp/v2/posts/{postId}")
-    fun getPostById(@Path("postId") postId: Int): Call<PostInfoDict?>?
+    suspend fun getPostById(@Path("postId") postId: Int): Post
 
     @GET("wp/v2/posts")
     fun getPostsById(@Query("page") page: Int): Call<List<PostInfoDict?>?>?
@@ -43,4 +47,16 @@ interface SunWordpressService {
 
     @GET("wp/v2/urltoid")
     fun urlToId(@Query("url") url: String?): Call<Int?>?
+
+    companion object {
+        private const val BASE_URL = "https://cornellsun.com/wp-json/"
+        fun create(): SunWordpressService {
+            val logger =
+                HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
+            val client = OkHttpClient.Builder().addInterceptor(logger).build()
+            return Retrofit.Builder().baseUrl(BASE_URL).client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build().create(SunWordpressService::class.java)
+        }
+    }
 }

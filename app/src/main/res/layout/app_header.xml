@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/header"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/app_header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sonnenstrahl_ausgezeichnet"
+            android:layout_gravity="center"
+            android:text="@string/app_heading"
+            android:textColor="@color/black"
+            android:textSize="32sp" />
+
+        <ImageView
+            android:id="@+id/app_header_search"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="end"
+            app:layout_constraintLeft_toRightOf="@id/app_header_title"
+            android:src="@drawable/search_icon_light"
+            android:background="@drawable/search_icon_background_light"
+            android:padding="8dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <View
+        android:id="@+id/app_header_divider"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        style="@style/thinDivider" />
+</androidx.constraintlayout.widget.ConstraintLayout>

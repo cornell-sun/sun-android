@@ -11,17 +11,17 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.cornell.daily.sun.R
+import com.cornell.daily.sun.data.PostInfoDict
 import com.cornell.daily.sun.data.Section
 import com.cornell.daily.sun.data.SectionType
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.squareup.picasso.Picasso
-import dagger.hilt.android.qualifiers.ApplicationContext
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class MainFeedSectionAdapter @Inject constructor(@ApplicationContext private val context: Context) :
+class MainFeedSectionAdapter(
+    private val context: Context?,
+    val selectPostFn: (PostInfoDict) -> Unit
+) :
     ListAdapter<Section, RecyclerView.ViewHolder>(PostObjectListDiffCallback()) {
 
     class SectionHolder internal constructor(sectionView: View) :
@@ -31,22 +31,22 @@ class MainFeedSectionAdapter @Inject constructor(@ApplicationContext private val
             sectionView.findViewById(R.id.main_feed_section_pager_tab_layout)
         val mainFeedSectionViewPager: ViewPager2 =
             sectionView.findViewById(R.id.main_feed_section_pager)
-        val sectionFeaturedArticleTitle: TextView =
-            sectionView.findViewById(R.id.section_featured_article_title)
-        val sectionFeaturedArticleAuthor: TextView =
-            sectionView.findViewById(R.id.section_featured_author)
-        val sectionFeaturedArticleImage: ImageView =
-            sectionView.findViewById(R.id.section_featured_image)
+        val sectionFeaturedPostTitle: TextView =
+            sectionView.findViewById(R.id.section_featured_post_title)
+        val sectionFeaturedPostAuthor: TextView =
+            sectionView.findViewById(R.id.section_featured_post_author)
+        val sectionFeaturedPostImage: ImageView =
+            sectionView.findViewById(R.id.section_featured_post_image)
     }
 
     class FeaturedArticleHolder internal constructor(featuredArticleView: View) :
         RecyclerView.ViewHolder(featuredArticleView) {
         val featuredArticleTitle: TextView =
-            featuredArticleView.findViewById(R.id.featured_article_title)
+            featuredArticleView.findViewById(R.id.featured_post_title)
         val featuredArticleImage: ImageView =
-            featuredArticleView.findViewById(R.id.featured_article_image)
+            featuredArticleView.findViewById(R.id.featured_post_image)
         val featuredArticleAuthor: TextView =
-            featuredArticleView.findViewById(R.id.featured_article_author)
+            featuredArticleView.findViewById(R.id.featured_post_author)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -63,6 +63,7 @@ class MainFeedSectionAdapter @Inject constructor(@ApplicationContext private val
             else -> {
                 val featuredArticleView = LayoutInflater.from(parent.context)
                     .inflate(R.layout.main_feed_featured_article, parent, false) as View
+
                 return FeaturedArticleHolder(featuredArticleView)
             }
         }
@@ -77,15 +78,16 @@ class MainFeedSectionAdapter @Inject constructor(@ApplicationContext private val
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val section = currentList[position].sectionType
+        var post: PostInfoDict? = null
         when (holder.itemViewType) {
             -1 -> {
                 val sectionTitle = section.title
                 val posts = currentList[position].posts
-                val topSectionPost = currentList[position].posts[0]
+                post = currentList[position].posts[0]
                 val remainingPosts = posts.slice(1 until posts.size)
                 val sectionHolder = holder as SectionHolder
                 sectionHolder.sectionTitle.text = sectionTitle
-                val sectionPageAdapter = MainFeedSectionPageAdapter()
+                val sectionPageAdapter = MainFeedSectionPageAdapter(selectPostFn)
                 sectionHolder.mainFeedSectionViewPager.apply {
                     adapter = sectionPageAdapter
                 }
@@ -97,22 +99,26 @@ class MainFeedSectionAdapter @Inject constructor(@ApplicationContext private val
                         tab.view.isClickable = false
                     }
                 }.attach()
-                sectionHolder.sectionFeaturedArticleTitle.text = topSectionPost.title
-                sectionHolder.sectionFeaturedArticleAuthor.text =
-                    context.getString(R.string.byline, topSectionPost.getByline())
-                Picasso.get().load(topSectionPost.getMediumImageUrl()).fit().centerCrop()
-                    .into(sectionHolder.sectionFeaturedArticleImage)
+                sectionHolder.sectionFeaturedPostTitle.text = post.title
+                sectionHolder.sectionFeaturedPostAuthor.text =
+                    context?.getString(R.string.byline, post.getByline())
+                Picasso.get().load(post.getMediumImageUrl()).fit().centerCrop()
+                    .into(sectionHolder.sectionFeaturedPostImage)
                 sectionPageAdapter.submitList(remainingPosts.windowed(3, 3, partialWindows = false))
             }
             SectionType.FEATURED.id -> {
-                val post = currentList[position].posts[0]
+                post = currentList[position].posts[0]
                 val featuredArticleHolder = holder as FeaturedArticleHolder
+
                 featuredArticleHolder.featuredArticleTitle.text = post.title
                 featuredArticleHolder.featuredArticleAuthor.text =
-                    context.getString(R.string.byline, post.getByline())
+                    context?.getString(R.string.byline, post.getByline())
                 Picasso.get().load(post.getMediumImageUrl()).fit().centerCrop()
                     .into(featuredArticleHolder.featuredArticleImage)
             }
+        }
+        holder.itemView.setOnClickListener {
+            selectPostFn(post!!)
         }
     }
 }

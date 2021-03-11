@@ -5,27 +5,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cornell.daily.sun.adapters.MainFeedSectionAdapter
+import com.cornell.daily.sun.util.InjectorUtils
 import com.cornell.daily.sun.viewmodels.MainFeedViewModel
-import dagger.hilt.android.AndroidEntryPoint
+import com.cornell.daily.sun.viewmodels.PostViewModel
 import kotlinx.android.synthetic.main.main_feed_fragment.view.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@AndroidEntryPoint
 class MainFeedFragment : Fragment() {
-    private val mainFeedViewModel: MainFeedViewModel by lazy {
-        ViewModelProvider(this).get(MainFeedViewModel::class.java)
-    }
+    private val mainFeedViewModel: MainFeedViewModel by viewModels { InjectorUtils.provideMainFeeViewModelFactory() }
+
+    private val postViewModel: PostViewModel by activityViewModels { InjectorUtils.provideMainFeeViewModelFactory() }
+
     private lateinit var mainFeedSectionsRecyclerView: RecyclerView
 
+    private lateinit var mainFeedSectionAdapter: MainFeedSectionAdapter
 
-    @Inject
-    lateinit var mainFeedSectionAdapter: MainFeedSectionAdapter
     private lateinit var mainFeedSectionLayoutManager: LinearLayoutManager
 
     override fun onCreateView(
@@ -34,7 +35,8 @@ class MainFeedFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = inflater.inflate(R.layout.main_feed_fragment, container, false)
-
+        mainFeedSectionAdapter =
+            MainFeedSectionAdapter(context, postViewModel::pushPost)
         mainFeedSectionsRecyclerView = binding.main_feed_section_list
         mainFeedSectionLayoutManager = LinearLayoutManager(activity)
 
@@ -46,6 +48,13 @@ class MainFeedFragment : Fragment() {
         mainFeedViewModel.sections.observe(viewLifecycleOwner) { sections ->
             mainFeedSectionAdapter.submitList(sections)
         }
+
+        postViewModel.postStack.observe(viewLifecycleOwner) {
+            if (!it.isEmpty()) {
+                findNavController().navigate(R.id.main_feed_to_post)
+            }
+        }
+
 
         binding.main_feed_swipe_container.setOnRefreshListener {
             GlobalScope.launch {

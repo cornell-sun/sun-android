@@ -1,16 +1,11 @@
 package com.cornell.daily.sun.adapters
 
-import android.content.Context
-import android.graphics.drawable.Icon
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.marginBottom
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cornell.daily.sun.R
@@ -18,28 +13,24 @@ import com.cornell.daily.sun.data.SectionType
 
 
 class SectionsAdapter(
-    private var sections: MutableList<SectionType>,
-    private val context: Context
+    private var sections: MutableList<SectionType>
 ) : RecyclerView.Adapter<SectionsAdapter.ViewHolder>() {
 
     class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val icon : ImageView = itemView.findViewById(R.id.icon)
-        val textView : TextView = itemView.findViewById(R.id.text_view)
+        val icon: ImageView = itemView.findViewById(R.id.icon)
+        val textView: TextView = itemView.findViewById(R.id.text_view)
     }
 
-    private val WIDTH_FULL = 0
-    private val WIDTH_HALF = 1
-
-    val imageViewHeightRatioBig = 78.0 / 100.0
-    val imageViewWidthRatioBig = 186.0 / 345.0
-    val imageViewHeightRatioSmall = 50.0 / 100.0
-    val imageViewWidthRatioSmall = 50.0 / 165.0
+    private val imageViewHeightRatioBig = 78.0 / 100.0
+    private val imageViewWidthRatioBig = 186.0 / 345.0
+    private val imageViewHeightRatioSmall = 50.0 / 100.0
+    private val imageViewWidthRatioSmall = 50.0 / 165.0
 
     override fun getItemViewType(position: Int): Int {
-        if (position == 0) {
-            return WIDTH_FULL
+        return if (position == 0) {
+            WIDTH_FULL
         } else {
-            return WIDTH_HALF
+            WIDTH_HALF
         }
     }
 
@@ -85,4 +76,9 @@ class SectionsAdapter(
     }
 
     override fun getItemCount() = sections.size
+
+    companion object {
+        private const val WIDTH_FULL = 0
+        private const val WIDTH_HALF = 1
+    }
 }

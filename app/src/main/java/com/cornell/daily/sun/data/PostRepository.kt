@@ -1,16 +1,12 @@
 package com.cornell.daily.sun.data
 
-import com.cornell.daily.sun.R
 import com.cornell.daily.sun.api.SunWordpressService
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class PostRepository @Inject constructor(private val service: SunWordpressService) {
+class PostRepository constructor(private val service: SunWordpressService) {
     suspend fun getSectionPosts(): MutableList<Section> {
         val featuredPostID = getFeaturedPost().id
         val deferredCalls: List<Deferred<Section>> =
@@ -40,6 +36,10 @@ class PostRepository @Inject constructor(private val service: SunWordpressServic
 
     suspend fun getFeaturedPost(): PostInfoDict {
         return service.getFeaturedPost().postInfoDict
+    }
+
+    suspend fun getPost(id: Int): PostInfoDict {
+        return service.getPostById(id).postInfoDict
     }
 
     companion object {

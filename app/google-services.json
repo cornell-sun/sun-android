@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "579354278997",
+    "firebase_url": "https://cornell-sun.firebaseio.com",
+    "project_id": "cornell-sun",
+    "storage_bucket": "cornell-sun.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:579354278997:android:eeab6d5e69369f8e9aa8dc",
+        "android_client_info": {
+          "package_name": "com.cornell.daily.sun"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "579354278997-4lseuj7gd4tptmahrj29378kf3i4ut0u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXA9Gl5ujx1oy3tR4OdFi1GxW39E0a6rg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "579354278997-4lseuj7gd4tptmahrj29378kf3i4ut0u.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "579354278997-gbvo06vg5al3tuvjfvmdgncbngja8arl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.cornellsun.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

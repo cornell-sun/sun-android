@@ -1,7 +1,6 @@
 package com.cornell.daily.sun
 
 //import android.R
-import com.cornell.daily.sun.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +15,7 @@ import kotlinx.android.synthetic.main.sections_fragment.view.*
 
 
 class SectionsFragment : Fragment() {
-    private var sections = mutableListOf<SectionType>(
+    private var sections = mutableListOf(
         SectionType.NEWS,
         SectionType.OPINION,
         SectionType.SPORTS,
@@ -26,11 +25,9 @@ class SectionsFragment : Fragment() {
         SectionType.MULTIMEDIA
     )
 
-    // Set up variables for recycler view
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: GridLayoutManager
-    //RecyclerView.LayoutManager
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,23 +37,22 @@ class SectionsFragment : Fragment() {
 
         recyclerView = binding.my_recycler_view
         viewManager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
-//            LinearLayoutManager(activity)
-        viewAdapter = SectionsAdapter(sections, requireContext())
+        viewAdapter = SectionsAdapter(sections)
 
         recyclerView.apply {
             adapter = viewAdapter
             layoutManager = viewManager
         }
 
-        viewManager.setSpanSizeLookup(object : SpanSizeLookup() {
+        viewManager.spanSizeLookup = object : SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
-                if (position == 0) {
-                    return 2
+                return if (position == 0) {
+                    2
                 } else {
-                    return 1
+                    1
                 }
             }
-        })
+        }
 
         return binding
 

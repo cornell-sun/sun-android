@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="15sp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/suggested_post_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_min="100dp"
+        app:layout_constraintHeight_max="110dp"
+        app:layout_constraintWidth_min="100dp" />
+
+    <TextView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:paddingLeft="10sp"
+        android:textSize="21sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@id/suggested_post_image"
+        android:id="@+id/suggested_post_title"
+        android:layout_width="0sp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:paddingStart="10sp"
+        tools:ignore="RtlSymmetry" />
+
+    <TextView
+        app:layout_constraintTop_toBottomOf="@id/suggested_post_title"
+        app:layout_constraintLeft_toRightOf="@id/suggested_post_image"
+        app:layout_constraintRight_toRightOf="parent"
+        android:paddingLeft="10sp"
+        android:textAllCaps="true"
+        android:textColor="@color/darkGrey"
+        android:id="@+id/suggested_post_author"
+        android:layout_width="0sp"
+        android:layout_height="wrap_content"
+        android:paddingStart="10sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        tools:ignore="RtlSymmetry" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,15 +9,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cornell.daily.sun.R
 import com.cornell.daily.sun.data.PostInfoDict
-import javax.inject.Singleton
 
-
-@Singleton
-class MainFeedSectionPageAdapter :
+class MainFeedSectionPageAdapter(private val selectPostFn: (PostInfoDict) -> Unit) :
     ListAdapter<List<PostInfoDict>, RecyclerView.ViewHolder>(PageDiffCallback()) {
 
     class PageHolder internal constructor(pageView: View) : RecyclerView.ViewHolder(pageView) {
-        val mainFeedArticleRecyclerView: RecyclerView =
+        val mainFeedPostRecyclerView: RecyclerView =
             pageView.findViewById(R.id.main_feed_article_list)
     }
 
@@ -28,11 +25,11 @@ class MainFeedSectionPageAdapter :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val articleAdapter = MainFeedArticleAdapter()
+        val articleAdapter = MainFeedArticleAdapter(selectPostFn)
         val pageHolder = holder as PageHolder
         val page = currentList[position]
         articleAdapter.submitList(page)
-        pageHolder.mainFeedArticleRecyclerView.apply {
+        pageHolder.mainFeedPostRecyclerView.apply {
             adapter = articleAdapter
             layoutManager = LinearLayoutManager(context)
         }

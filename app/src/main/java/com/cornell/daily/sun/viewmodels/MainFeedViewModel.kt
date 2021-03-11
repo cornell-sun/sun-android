@@ -1,6 +1,5 @@
 package com.cornell.daily.sun.viewmodels
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.cornell.daily.sun.data.PostRepository
@@ -9,7 +8,7 @@ import com.cornell.daily.sun.data.SectionType
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class MainFeedViewModel @ViewModelInject constructor(private val postRepository: PostRepository) :
+class MainFeedViewModel(private val postRepository: PostRepository) :
     ViewModel() {
 
     val sections: MutableLiveData<List<Section>> by lazy {
@@ -28,4 +27,6 @@ class MainFeedViewModel @ViewModelInject constructor(private val postRepository:
         sectionPosts.add(0, featuredSection)
         sections.postValue(sectionPosts)
     }
+
+
 }
