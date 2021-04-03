@@ -1,12 +1,15 @@
 package com.cornell.daily.sun.adapters
 
 import android.content.Context
+import android.os.Build
 import android.text.Html
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
@@ -118,7 +121,13 @@ class PostContentAdapter(
             }
             is Paragraph -> {
                 val paragraphHolder = holder as ParagraphHolder
-                paragraphHolder.paragraphText.text = Html.fromHtml(currentPostContent.text)
+                paragraphHolder.paragraphText.movementMethod = LinkMovementMethod.getInstance()
+                if (Build.VERSION.SDK_INT >= 24) {
+                    paragraphHolder.paragraphText.text = Html.fromHtml(currentPostContent.text, Html.FROM_HTML_MODE_COMPACT)
+                } else {
+                    paragraphHolder.paragraphText.text = Html.fromHtml(currentPostContent.text)
+                }
+
             }
             is SuggestedPosts -> {
                 val suggestedPostsHolder = holder as SuggestedPostsHolder
