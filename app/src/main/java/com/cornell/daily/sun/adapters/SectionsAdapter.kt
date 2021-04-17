@@ -10,9 +10,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cornell.daily.sun.R
 import com.cornell.daily.sun.data.SectionType
+import kotlinx.coroutines.selects.select
 
 
 class SectionsAdapter(
+    private val selectSectionCallback: (SectionType) -> Unit,
     private var sections: MutableList<SectionType>
 ) : RecyclerView.Adapter<SectionsAdapter.ViewHolder>() {
 
@@ -46,7 +48,7 @@ class SectionsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textView.text = sections.get(position).title
+        holder.textView.text = sections[position].title
         holder.icon.setImageResource(sections[position].image)
 
         val iconParams = holder.icon.layoutParams as ConstraintLayout.LayoutParams
@@ -73,6 +75,9 @@ class SectionsAdapter(
         }
         holder.icon.requestLayout()
         holder.itemView.requestLayout()
+        holder.itemView.setOnClickListener {
+            selectSectionCallback(sections[position])
+        }
     }
 
     override fun getItemCount() = sections.size

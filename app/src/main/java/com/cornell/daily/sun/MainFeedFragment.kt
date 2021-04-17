@@ -19,9 +19,9 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class MainFeedFragment : Fragment() {
-    private val mainFeedViewModel: MainFeedViewModel by viewModels { InjectorUtils.provideMainFeeViewModelFactory() }
+    private val mainFeedViewModel: MainFeedViewModel by viewModels { InjectorUtils.provideViewModelFactory() }
 
-    private val postViewModel: PostViewModel by activityViewModels { InjectorUtils.provideMainFeeViewModelFactory() }
+    private val postViewModel: PostViewModel by activityViewModels { InjectorUtils.provideViewModelFactory() }
 
     private lateinit var mainFeedSectionsRecyclerView: RecyclerView
 

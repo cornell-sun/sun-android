@@ -21,7 +21,7 @@ class MainFeedViewModel(private val postRepository: PostRepository) :
 
     suspend fun loadSections() {
         // Create featured section separately
-        val sectionPosts = postRepository.getSectionPosts()
+        val sectionPosts = postRepository.getMainFeedPosts()
         val featuredSection =
             Section(SectionType.FEATURED, mutableListOf((postRepository.getFeaturedPost())))
         sectionPosts.add(0, featuredSection)

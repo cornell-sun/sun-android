@@ -27,7 +27,7 @@ class PostFragment : Fragment() {
 
     private lateinit var postContentLayoutManager: LinearLayoutManager
 
-    private val postViewModel: PostViewModel by activityViewModels { InjectorUtils.provideMainFeeViewModelFactory() }
+    private val postViewModel: PostViewModel by activityViewModels { InjectorUtils.provideViewModelFactory() }
 
     private lateinit var post: PostInfoDict
 

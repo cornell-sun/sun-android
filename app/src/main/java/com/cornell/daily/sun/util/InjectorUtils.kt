@@ -5,7 +5,7 @@ import com.cornell.daily.sun.data.PostRepository
 import com.cornell.daily.sun.viewmodels.ViewModelFactory
 
 object InjectorUtils {
-    fun provideMainFeeViewModelFactory(): ViewModelFactory {
+    fun provideViewModelFactory(): ViewModelFactory {
         val postRepository = PostRepository(SunWordpressService.create())
         return ViewModelFactory(postRepository)
     }
