@@ -11,7 +11,7 @@ import com.cornell.daily.sun.data.PostRepository
 import com.cornell.daily.sun.data.PostsPagingSource
 import com.cornell.daily.sun.data.SectionType
 
-class SectionViewModel(private val postRepository: PostRepository) : ViewModel() {
+class SectionsViewModel(private val postRepository: PostRepository) : ViewModel() {
     private val mutableSection: MutableLiveData<SectionType> = MutableLiveData()
     val section: LiveData<SectionType> get() = mutableSection
 

@@ -15,9 +15,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cornell.daily.sun.adapters.FeedAdapter
 import com.cornell.daily.sun.util.InjectorUtils
 import com.cornell.daily.sun.viewmodels.PostViewModel
-import com.cornell.daily.sun.viewmodels.SectionViewModel
+import com.cornell.daily.sun.viewmodels.SectionsViewModel
 import kotlinx.android.synthetic.main.feed_fragment.view.*
+import kotlinx.android.synthetic.main.main_feed_fragment.view.*
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.retry
 import kotlinx.coroutines.launch
 
 /**
@@ -25,7 +28,7 @@ import kotlinx.coroutines.launch
  */
 class FeedFragment: Fragment() {
     private val postViewModel: PostViewModel by activityViewModels { InjectorUtils.provideViewModelFactory() }
-    private val sectionViewModel: SectionViewModel by activityViewModels { InjectorUtils.provideViewModelFactory() }
+    private val sectionViewModel: SectionsViewModel by activityViewModels { InjectorUtils.provideViewModelFactory() }
     private lateinit var feedAdapter: FeedAdapter
     private lateinit var feedRecyclerView: RecyclerView
     private lateinit var feedLayoutManager: LinearLayoutManager
@@ -45,7 +48,7 @@ class FeedFragment: Fragment() {
             layoutManager = feedLayoutManager
         }
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             sectionViewModel.flow.collectLatest { pagingData ->
                 feedAdapter.submitData(pagingData)
             }
@@ -57,6 +60,12 @@ class FeedFragment: Fragment() {
             }
         }
 
+        binding.feed_swipe_container.setOnRefreshListener {
+            GlobalScope.launch {
+                feedAdapter.refresh()
+                binding.feed_swipe_container.isRefreshing = false
+            }
+        }
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         return binding
     }

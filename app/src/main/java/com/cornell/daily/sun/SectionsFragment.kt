@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cornell.daily.sun.adapters.SectionsAdapter
 import com.cornell.daily.sun.data.SectionType
 import com.cornell.daily.sun.util.InjectorUtils
-import com.cornell.daily.sun.viewmodels.SectionViewModel
+import com.cornell.daily.sun.viewmodels.SectionsViewModel
 import kotlinx.android.synthetic.main.sections_fragment.view.*
 
 
@@ -27,7 +27,7 @@ class SectionsFragment : Fragment() {
         SectionType.DINING,
         SectionType.MULTIMEDIA
     )
-    private val sectionViewModel: SectionViewModel by activityViewModels { InjectorUtils.provideViewModelFactory() }
+    private val sectionViewModel: SectionsViewModel by activityViewModels { InjectorUtils.provideViewModelFactory() }
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: GridLayoutManager

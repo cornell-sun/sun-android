@@ -13,8 +13,8 @@ class ViewModelFactory(private val postRepository: PostRepository) :
             MainFeedViewModel(postRepository) as T
         } else if (modelClass.isAssignableFrom(PostViewModel::class.java)) {
             PostViewModel(postRepository) as T
-        } else if (modelClass.isAssignableFrom(SectionViewModel::class.java)) {
-            SectionViewModel(postRepository) as T
+        } else if (modelClass.isAssignableFrom(SectionsViewModel::class.java)) {
+            SectionsViewModel(postRepository) as T
         }
         else {
             throw IllegalArgumentException("ViewModel Not Found")
