@@ -13,4 +13,11 @@
         <item name="android:layout_height">5dp</item>
         <item name="android:background">#F0F0F0</item>
     </style>
+
+    <style name="veryThickDarkDivider">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">8dp</item>
+        <item name="android:background">#E5E5E5</item>
+    </style>
+
 </resources>

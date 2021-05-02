@@ -3,6 +3,11 @@ package com.cornell.daily.sun.data
 import com.google.gson.annotations.SerializedName
 import com.google.gson.internal.bind.util.ISO8601Utils
 import java.text.ParsePosition
+import java.time.Duration
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.Period
+import java.util.*
 
 /**
  * Data class representing a Daily Sun news article
@@ -58,5 +63,14 @@ data class PostInfoDict(
         val fixedISODate = "$date-05:00"
         val date = ISO8601Utils.parse(fixedISODate, ParsePosition(0))
         return String.format("%1\$tB %1\$td, %1\$tY", date)
+    }
+
+    fun getDaysElapsedFromPost(): String {
+        val fixedISODate = "$date-05:00"
+        val date = ISO8601Utils.parse(fixedISODate, ParsePosition(0))
+        val today = Calendar.getInstance().time
+        val diff = today.time - date.time
+        val numOfDays = (diff / (1000 * 60 * 60 * 24))
+        return numOfDays.toString()
     }
 }

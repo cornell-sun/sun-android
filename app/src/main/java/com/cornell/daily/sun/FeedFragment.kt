@@ -37,7 +37,7 @@ class FeedFragment: Fragment() {
     ): View? {
         val binding = inflater.inflate(R.layout.feed_fragment, container, false)
         setHasOptionsMenu(true)
-        feedAdapter = FeedAdapter(postViewModel::pushPost)
+        feedAdapter = FeedAdapter(postViewModel::pushPost, context)
         feedRecyclerView = binding.feed_recycler_view
         feedLayoutManager = LinearLayoutManager(activity)
         feedRecyclerView.apply {
@@ -62,8 +62,8 @@ class FeedFragment: Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        sectionViewModel.setSection(null);
-        System.out.println(findNavController().popBackStack())
+            sectionViewModel.setSection(null)
+            findNavController().navigate(R.id.feed_to_sections)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
         return super.onOptionsItemSelected(item)
     }

@@ -26,6 +26,9 @@
         <action
             android:id="@+id/feed_to_post"
             app:destination="@id/post_fragment" />
+        <action
+            android:id="@+id/feed_to_sections"
+            app:destination="@id/sections_fragment" />
     </fragment>
     <fragment
         android:id="@+id/sections_fragment"

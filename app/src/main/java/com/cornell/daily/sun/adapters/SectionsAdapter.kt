@@ -39,7 +39,7 @@ class SectionsAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(
-                R.layout.sections_recyclerview_cell,
+                R.layout.list_item_sections_cell,
                 parent,
                 false
             ) as View
