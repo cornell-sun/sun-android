@@ -1,9 +1,12 @@
 package com.cornell.daily.sun
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -40,7 +43,7 @@ class SectionsFragment : Fragment() {
 
         recyclerView = binding.my_recycler_view
         viewManager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
-        viewAdapter = SectionsAdapter(sectionViewModel::setSection, sections)
+        viewAdapter = SectionsAdapter(activity, sectionViewModel::setSection, sections)
 
         recyclerView.apply {
             adapter = viewAdapter
@@ -62,6 +65,14 @@ class SectionsFragment : Fragment() {
                 findNavController().navigate(R.id.sections_to_section_feed)
             }
         }
+
+        val appHeader = (activity as MainActivity).findViewById<TextView>(R.id.app_header_title)
+
+        val appHeaderSearch = (activity as MainActivity).findViewById<ImageView>(R.id.app_header_search)
+        appHeaderSearch.visibility = View.INVISIBLE
+        appHeader.text = (activity as MainActivity).getString(R.string.sections_heading)
+        appHeader.typeface = Typeface.createFromAsset((activity as MainActivity).assets, "fonts/keplterstd_bold.otf")
+        appHeader.visibility = View.VISIBLE
 
         return binding
 

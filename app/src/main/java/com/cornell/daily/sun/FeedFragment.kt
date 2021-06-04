@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -66,6 +67,19 @@ class FeedFragment: Fragment() {
                 binding.feed_swipe_container.isRefreshing = false
             }
         }
+
+        sectionViewModel.section.observe(viewLifecycleOwner) {
+            if (it != null) {
+                GlobalScope.launch {
+                    feedAdapter.refresh()
+                    binding.feed_swipe_container.isRefreshing = false
+                }
+            }
+        }
+
+        val appHeader = (activity as MainActivity).findViewById<TextView>(R.id.app_header_title)
+        appHeader.text = sectionViewModel.section.value?.title
+        appHeader.visibility = View.VISIBLE
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         return binding
     }

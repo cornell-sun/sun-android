@@ -17,7 +17,6 @@
             android:id="@+id/app_header_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/sonnenstrahl_ausgezeichnet"
             android:layout_gravity="center"
             android:text="@string/app_heading"
             android:textColor="@color/black"
