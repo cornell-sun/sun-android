@@ -25,9 +25,6 @@ class MainFeedArticleAdapter(val selectPostFn: (PostInfoDict) -> Unit) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleHolder {
         val articleView = LayoutInflater.from(parent.context)
             .inflate(R.layout.list_item_main_feed_article, parent, false) as View
-        articleView.setOnClickListener { view ->
-            view.findNavController().navigate(R.id.main_feed_to_post)
-        }
         return ArticleHolder(articleView)
     }
 
@@ -37,6 +34,8 @@ class MainFeedArticleAdapter(val selectPostFn: (PostInfoDict) -> Unit) :
         Picasso.get().load(post.getMediumImageUrl()).fit().centerCrop()
             .into(holder.articleImageView)
         holder.authorText.text = post.getByline()
-        holder.itemView.setOnClickListener { selectPostFn(post) }
+        holder.itemView.setOnClickListener {
+            selectPostFn(post)
+        }
     }
 }

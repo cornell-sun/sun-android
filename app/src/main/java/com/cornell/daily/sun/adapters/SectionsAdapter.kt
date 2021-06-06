@@ -1,5 +1,7 @@
 package com.cornell.daily.sun.adapters
 
+import android.content.Context
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +15,8 @@ import com.cornell.daily.sun.data.SectionType
 
 
 class SectionsAdapter(
+    private val context: Context?,
+    private val selectSectionCallback: (SectionType) -> Unit,
     private var sections: MutableList<SectionType>
 ) : RecyclerView.Adapter<SectionsAdapter.ViewHolder>() {
 
@@ -37,7 +41,7 @@ class SectionsAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(
-                R.layout.sections_recyclerview_cell,
+                R.layout.list_item_sections_cell,
                 parent,
                 false
             ) as View
@@ -46,7 +50,8 @@ class SectionsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textView.text = sections.get(position).title
+        holder.textView.text = sections[position].title
+        holder.textView.typeface = Typeface.createFromAsset(context?.assets, "fonts/avenir_medium.ttf")
         holder.icon.setImageResource(sections[position].image)
 
         val iconParams = holder.icon.layoutParams as ConstraintLayout.LayoutParams
@@ -73,6 +78,9 @@ class SectionsAdapter(
         }
         holder.icon.requestLayout()
         holder.itemView.requestLayout()
+        holder.itemView.setOnClickListener {
+            selectSectionCallback(sections[position])
+        }
     }
 
     override fun getItemCount() = sections.size

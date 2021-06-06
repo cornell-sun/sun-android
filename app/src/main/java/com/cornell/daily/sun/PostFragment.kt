@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -27,7 +30,7 @@ class PostFragment : Fragment() {
 
     private lateinit var postContentLayoutManager: LinearLayoutManager
 
-    private val postViewModel: PostViewModel by activityViewModels { InjectorUtils.provideMainFeeViewModelFactory() }
+    private val postViewModel: PostViewModel by activityViewModels { InjectorUtils.provideViewModelFactory() }
 
     private lateinit var post: PostInfoDict
 
@@ -43,6 +46,7 @@ class PostFragment : Fragment() {
         setHasOptionsMenu(true)
         postContentAdapter = PostContentAdapter(context, postViewModel::loadPost)
         postContentRecyclerView = binding.post_view_content
+
         postContentRecyclerView.setHasFixedSize(true)
         postContentLayoutManager = LinearLayoutManager(activity)
         setAdapterContent()
@@ -61,6 +65,10 @@ class PostFragment : Fragment() {
             activity?.findViewById(R.id.bottom_nav_view)!!
         bottomNavigationView.visibility = View.GONE
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        val appHeaderSearch = (activity as MainActivity).findViewById<ImageView>(R.id.app_header_search)
+        appHeaderSearch.visibility = View.INVISIBLE
+        val appHeader = (activity as MainActivity).findViewById<TextView>(R.id.app_header_title)
+        appHeader.visibility = View.INVISIBLE
         return binding
     }
 

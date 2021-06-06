@@ -1,16 +1,22 @@
 package com.cornell.daily.sun
 
-//import android.R
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import androidx.recyclerview.widget.RecyclerView
 import com.cornell.daily.sun.adapters.SectionsAdapter
 import com.cornell.daily.sun.data.SectionType
+import com.cornell.daily.sun.util.InjectorUtils
+import com.cornell.daily.sun.viewmodels.SectionsViewModel
 import kotlinx.android.synthetic.main.sections_fragment.view.*
 
 
@@ -24,7 +30,7 @@ class SectionsFragment : Fragment() {
         SectionType.DINING,
         SectionType.MULTIMEDIA
     )
-
+    private val sectionViewModel: SectionsViewModel by activityViewModels { InjectorUtils.provideViewModelFactory() }
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: GridLayoutManager
@@ -37,7 +43,7 @@ class SectionsFragment : Fragment() {
 
         recyclerView = binding.my_recycler_view
         viewManager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
-        viewAdapter = SectionsAdapter(sections)
+        viewAdapter = SectionsAdapter(activity, sectionViewModel::setSection, sections)
 
         recyclerView.apply {
             adapter = viewAdapter
@@ -53,6 +59,20 @@ class SectionsFragment : Fragment() {
                 }
             }
         }
+
+        sectionViewModel.section.observe(viewLifecycleOwner) {
+            if (it != null) {
+                findNavController().navigate(R.id.sections_to_section_feed)
+            }
+        }
+
+        val appHeader = (activity as MainActivity).findViewById<TextView>(R.id.app_header_title)
+
+        val appHeaderSearch = (activity as MainActivity).findViewById<ImageView>(R.id.app_header_search)
+        appHeaderSearch.visibility = View.INVISIBLE
+        appHeader.text = (activity as MainActivity).getString(R.string.sections_heading)
+        appHeader.typeface = Typeface.createFromAsset((activity as MainActivity).assets, "fonts/keplterstd_bold.otf")
+        appHeader.visibility = View.VISIBLE
 
         return binding
 

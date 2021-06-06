@@ -20,7 +20,22 @@
             app:destination="@id/main_feed_fragment" />
     </fragment>
     <fragment
+        android:id="@+id/feed_fragment"
+        android:name="com.cornell.daily.sun.FeedFragment"
+        tools:layout="@layout/feed_fragment">
+        <action
+            android:id="@+id/feed_to_post"
+            app:destination="@id/post_fragment" />
+        <action
+            android:id="@+id/feed_to_sections"
+            app:destination="@id/sections_fragment" />
+    </fragment>
+    <fragment
         android:id="@+id/sections_fragment"
         android:name="com.cornell.daily.sun.SectionsFragment"
-        tools:layout="@layout/sections_fragment" />
+        tools:layout="@layout/sections_fragment" >
+        <action
+            android:id="@+id/sections_to_section_feed"
+            app:destination="@id/feed_fragment" />
+    </fragment>
 </navigation>

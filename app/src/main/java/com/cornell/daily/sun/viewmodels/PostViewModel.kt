@@ -30,6 +30,5 @@ class PostViewModel(private val postRepository: PostRepository) : ViewModel() {
     suspend fun loadPost(postID: Int) {
         val newPost = postRepository.getPost(postID)
         pushPost(newPost)
-
     }
 }

@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Cornell Sun</string>
     <string name="app_heading">The Cornell Daily Sun</string>
+    <string name="sections_heading">Sections</string>
     <string name="byline">By %1$s</string>
+    <string name="article_days_ago">%1$s DAYS AGO</string>
+    <string name="article_one_day_ago">%1$s DAY AGO</string>
     <string name="post_suggested_section_title">Suggested Stories</string>
 </resources>

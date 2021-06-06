@@ -7,7 +7,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 
 class PostRepository constructor(private val service: SunWordpressService) {
-    suspend fun getSectionPosts(): MutableList<Section> {
+    suspend fun getMainFeedPosts(): MutableList<Section> {
         val featuredPostID = getFeaturedPost().id
         val deferredCalls: List<Deferred<Section>> =
             SectionType.values().filter { section -> section != SectionType.FEATURED }
@@ -32,6 +32,10 @@ class PostRepository constructor(private val service: SunWordpressService) {
                     }
                 }
         return deferredCalls.awaitAll().toMutableList()
+    }
+
+    suspend fun getPostsBySection(sectionType: SectionType, page: Int): List<PostInfoDict> {
+        return service.getPostsBySection(sectionType.id, page).map { post -> post.postInfoDict }
     }
 
     suspend fun getFeaturedPost(): PostInfoDict {
