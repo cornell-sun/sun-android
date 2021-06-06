@@ -33,7 +33,7 @@
     <fragment
         android:id="@+id/sections_fragment"
         android:name="com.cornell.daily.sun.SectionsFragment"
-        tools:layout="@layout/sections_fragment" >
+        tools:layout="@layout/sections_fragment">
         <action
             android:id="@+id/sections_to_section_feed"
             app:destination="@id/feed_fragment" />
