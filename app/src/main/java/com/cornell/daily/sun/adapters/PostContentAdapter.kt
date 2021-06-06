@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
@@ -123,7 +122,8 @@ class PostContentAdapter(
                 val paragraphHolder = holder as ParagraphHolder
                 paragraphHolder.paragraphText.movementMethod = LinkMovementMethod.getInstance()
                 if (Build.VERSION.SDK_INT >= 24) {
-                    paragraphHolder.paragraphText.text = Html.fromHtml(currentPostContent.text, Html.FROM_HTML_MODE_COMPACT)
+                    paragraphHolder.paragraphText.text =
+                        Html.fromHtml(currentPostContent.text, Html.FROM_HTML_MODE_COMPACT)
                 } else {
                     paragraphHolder.paragraphText.text = Html.fromHtml(currentPostContent.text)
                 }

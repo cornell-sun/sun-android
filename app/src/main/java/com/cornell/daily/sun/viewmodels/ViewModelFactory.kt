@@ -15,8 +15,7 @@ class ViewModelFactory(private val postRepository: PostRepository) :
             PostViewModel(postRepository) as T
         } else if (modelClass.isAssignableFrom(SectionsViewModel::class.java)) {
             SectionsViewModel(postRepository) as T
-        }
-        else {
+        } else {
             throw IllegalArgumentException("ViewModel Not Found")
         }
     }

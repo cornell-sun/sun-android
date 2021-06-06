@@ -3,10 +3,13 @@ package com.cornell.daily.sun.data
 import com.google.gson.annotations.SerializedName
 import com.google.gson.internal.bind.util.ISO8601Utils
 import java.text.ParsePosition
+import java.util.*
+
 import java.time.Duration
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.Period
+
 import java.util.*
 
 /**
