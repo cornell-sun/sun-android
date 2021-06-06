@@ -1,6 +1,5 @@
 package com.cornell.daily.sun
 
-import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -80,7 +79,6 @@ class MainFeedFragment : Fragment() {
         )
         appHeader.textSize = resources.getDimension(R.dimen.main_feed_header_text_size)
         appHeader.text = (activity as MainActivity).getString(R.string.app_heading)
-        appHeader.setTextColor(Color.BLACK)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         postViewModel.postStack.value?.clear()
