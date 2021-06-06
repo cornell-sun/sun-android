@@ -4,29 +4,29 @@
         android:id="@+id/main_feed_fragment"
         android:icon="@drawable/bottom_nav_feed_icon_selector"
         android:enabled="true"
-        android:title="Feed" />
+        android:title="@string/bottom_nav_feed_text" />
 
     <item
         android:id="@+id/sections_fragment"
         android:icon="@drawable/bottom_nav_sections_icon_selector"
         android:enabled="true"
-        android:title="Sections" />
+        android:title="@string/bottom_nav_sections_text" />
 
     <item
         android:id="@+id/for_you"
         android:icon="@drawable/bottom_nav_for_you_icon_selector"
         android:enabled="true"
-        android:title="For You" />
+        android:title="@string/bottom_nav_for_you_text" />
 
     <item
         android:id="@+id/bookmark"
         android:icon="@drawable/bottom_nav_bookmark_icon_selector"
         android:enabled="true"
-        android:title="Bookmark" />
+        android:title="@string/bottom_nav_bookmark_text" />
 
     <item
         android:id="@+id/settings"
         android:icon="@drawable/bottom_nav_settings_icon_selector"
         android:enabled="true"
-        android:title="Settings" />
+        android:title="@string/bottom_nav_settings_text" />
 </menu>

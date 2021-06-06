@@ -51,7 +51,8 @@ class SectionsAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.textView.text = sections[position].title
-        holder.textView.typeface = Typeface.createFromAsset(context?.assets, "fonts/avenir_medium.ttf")
+        holder.textView.typeface =
+            Typeface.createFromAsset(context?.assets, "fonts/avenir_medium.ttf")
         holder.icon.setImageResource(sections[position].image)
 
         val iconParams = holder.icon.layoutParams as ConstraintLayout.LayoutParams

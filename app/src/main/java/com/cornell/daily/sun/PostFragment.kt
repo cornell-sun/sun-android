@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -18,7 +17,6 @@ import com.cornell.daily.sun.adapters.PostContentAdapter
 import com.cornell.daily.sun.data.*
 import com.cornell.daily.sun.util.InjectorUtils
 import com.cornell.daily.sun.viewmodels.PostViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.post_fragment.view.*
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
@@ -33,9 +31,6 @@ class PostFragment : Fragment() {
     private val postViewModel: PostViewModel by activityViewModels { InjectorUtils.provideViewModelFactory() }
 
     private lateinit var post: PostInfoDict
-
-    private lateinit var bottomNavigationView: BottomNavigationView
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,11 +56,9 @@ class PostFragment : Fragment() {
             }
         }
 
-        bottomNavigationView =
-            activity?.findViewById(R.id.bottom_nav_view)!!
-        bottomNavigationView.visibility = View.GONE
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        val appHeaderSearch = (activity as MainActivity).findViewById<ImageView>(R.id.app_header_search)
+        val appHeaderSearch =
+            (activity as MainActivity).findViewById<ImageView>(R.id.app_header_search)
         appHeaderSearch.visibility = View.INVISIBLE
         val appHeader = (activity as MainActivity).findViewById<TextView>(R.id.app_header_title)
         appHeader.visibility = View.INVISIBLE
@@ -96,7 +89,6 @@ class PostFragment : Fragment() {
         if (postViewModel.postStack.value?.isEmpty() == true) {
             findNavController().popBackStack()
             (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
-            bottomNavigationView.visibility = View.VISIBLE
         }
         return super.onOptionsItemSelected(item)
     }

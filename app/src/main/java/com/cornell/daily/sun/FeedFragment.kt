@@ -18,16 +18,14 @@ import com.cornell.daily.sun.util.InjectorUtils
 import com.cornell.daily.sun.viewmodels.PostViewModel
 import com.cornell.daily.sun.viewmodels.SectionsViewModel
 import kotlinx.android.synthetic.main.feed_fragment.view.*
-import kotlinx.android.synthetic.main.main_feed_fragment.view.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.retry
 import kotlinx.coroutines.launch
 
 /**
  * Used with For You and and Sections
  */
-class FeedFragment: Fragment() {
+class FeedFragment : Fragment() {
     private val postViewModel: PostViewModel by activityViewModels { InjectorUtils.provideViewModelFactory() }
     private val sectionViewModel: SectionsViewModel by activityViewModels { InjectorUtils.provideViewModelFactory() }
     private lateinit var feedAdapter: FeedAdapter
@@ -81,12 +79,13 @@ class FeedFragment: Fragment() {
         appHeader.text = sectionViewModel.section.value?.title
         appHeader.visibility = View.VISIBLE
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        postViewModel.postStack.value?.clear()
         return binding
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-            sectionViewModel.setSection(null)
-            findNavController().navigate(R.id.feed_to_sections)
+        sectionViewModel.setSection(null)
+        findNavController().navigate(R.id.feed_to_sections)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
         return super.onOptionsItemSelected(item)
     }

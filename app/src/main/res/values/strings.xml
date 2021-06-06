@@ -6,4 +6,10 @@
     <string name="article_days_ago">%1$s DAYS AGO</string>
     <string name="article_one_day_ago">%1$s DAY AGO</string>
     <string name="post_suggested_section_title">Suggested Stories</string>
+    <string name="bottom_nav_for_you_text">For You</string>
+    <string name="bottom_nav_bookmark_text">Bookmark</string>
+    <string name="bottom_nav_settings_text">Settings</string>
+    <string name="bottom_nav_sections_text">Sections</string>
+    <string name="bottom_nav_feed_text">Feed</string>
+    <string name="app_header_search_content_description">Search</string>
 </resources>
