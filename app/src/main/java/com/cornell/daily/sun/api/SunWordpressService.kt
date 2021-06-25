@@ -40,10 +40,10 @@ interface SunWordpressService {
     val trending: Call<List<Any?>?>?
 
     @GET("wp/v2/posts")
-    fun searchPosts(
+    suspend fun searchPosts(
         @Query("search") query: String?,
         @Query("page") page: Int
-    ): Call<List<PostInfoDict?>?>?
+    ): List<Post>
 
     @GET("wp/v2/urltoid")
     fun urlToId(@Query("url") url: String?): Call<Int?>?

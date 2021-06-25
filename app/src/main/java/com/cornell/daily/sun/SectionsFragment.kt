@@ -1,12 +1,9 @@
 package com.cornell.daily.sun
 
-import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -67,16 +64,13 @@ class SectionsFragment : Fragment() {
             }
         }
 
-        val appHeader = (activity as MainActivity).findViewById<TextView>(R.id.app_header_title)
+        (activity as MainActivity).setupHeader(
+            "fonts/avenir_medium.ttf",
+            (activity as MainActivity).getString(R.string.sections_heading),
+            R.dimen.regular_header_text_size
+        )
 
-        val appHeaderSearch =
-            (activity as MainActivity).findViewById<ImageView>(R.id.app_header_search)
-        appHeaderSearch.visibility = View.INVISIBLE
-        appHeader.text = (activity as MainActivity).getString(R.string.sections_heading)
-        appHeader.typeface =
-            Typeface.createFromAsset((activity as MainActivity).assets, "fonts/avenir_medium.ttf")
-        appHeader.textSize = resources.getDimension(R.dimen.regular_header_text_size)
-        appHeader.visibility = View.VISIBLE
+        (activity as MainActivity).hideSearchButton()
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
         return binding
 

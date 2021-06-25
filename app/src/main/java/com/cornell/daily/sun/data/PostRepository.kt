@@ -46,6 +46,10 @@ class PostRepository constructor(private val service: SunWordpressService) {
         return service.getPostById(id).postInfoDict
     }
 
+    suspend fun getPosts(query: String, page: Int): List<PostInfoDict> {
+        return service.searchPosts(query, page).map { post -> post.postInfoDict }
+    }
+
     companion object {
         const val POSTS_PER_SECTION = 10
     }

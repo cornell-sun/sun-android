@@ -5,13 +5,6 @@ import com.google.gson.internal.bind.util.ISO8601Utils
 import java.text.ParsePosition
 import java.util.*
 
-import java.time.Duration
-import java.time.Instant
-import java.time.LocalDateTime
-import java.time.Period
-
-import java.util.*
-
 /**
  * Data class representing a Daily Sun news article
  */
