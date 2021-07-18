@@ -12,6 +12,9 @@ import com.cornell.daily.sun.R
 import com.cornell.daily.sun.data.PostInfoDict
 import com.squareup.picasso.Picasso
 
+/**
+ * Recycler View Adapter for posts within a section or within For You page
+ */
 class SectionsPostsAdapter(
     private val selectPostFn: (PostInfoDict) -> Unit,
     private val context: Context?

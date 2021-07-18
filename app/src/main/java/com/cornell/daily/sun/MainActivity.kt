@@ -1,9 +1,13 @@
 package com.cornell.daily.sun
 
+import android.app.Activity
+import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -26,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var searchButtonView: ImageView
     private lateinit var searchBox: EditText
     private lateinit var bottomNavigationView: BottomNavigationView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MobileAds.initialize(applicationContext)
@@ -37,12 +42,14 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         navController = navHostFragment.navController
 
+        // Set up Search Input Box here since Search is anticipated to appear in many screens
         searchBox = findViewById(R.id.search_box)
         searchBox.visibility = View.GONE
         searchBox.setOnEditorActionListener { v, actionId, event ->
             return@setOnEditorActionListener when (actionId) {
                 EditorInfo.IME_ACTION_SEND -> {
-                    searchViewModel.setQuery(v.text as String)
+                    searchViewModel.setQuery(v.text.toString())
+                    closeSearchSoftKeyboard()
                     true
                 }
                 else -> false
@@ -99,5 +106,9 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.visibility = View.VISIBLE
     }
 
-
+    fun closeSearchSoftKeyboard() {
+        val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(searchBox.windowToken, 0)
+        searchBox.clearFocus()
+    }
 }

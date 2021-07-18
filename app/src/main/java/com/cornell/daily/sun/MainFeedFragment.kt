@@ -74,6 +74,7 @@ class MainFeedFragment : Fragment() {
         )
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
+
         postViewModel.postStack.value?.clear()
         return binding
     }
