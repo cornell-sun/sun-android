@@ -56,6 +56,7 @@ class PostFragment : Fragment() {
 
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as MainActivity).hideSearchButton()
+        (activity as MainActivity).hideSearchBox()
         (activity as MainActivity).hideHeaderText()
         return binding
     }

@@ -19,6 +19,7 @@ import com.cornell.daily.sun.util.InjectorUtils
 import com.cornell.daily.sun.viewmodels.PostViewModel
 import com.cornell.daily.sun.viewmodels.SearchViewModel
 import kotlinx.android.synthetic.main.feed_fragment.view.*
+import kotlinx.android.synthetic.main.main_feed_fragment.view.*
 import kotlinx.android.synthetic.main.search_fragment.view.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collectLatest
@@ -57,6 +58,12 @@ class SearchFragment : Fragment() {
             }
         }
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            searchViewModel.flow.collectLatest { pagingData ->
+                searchContentAdapter.submitData(pagingData)
+            }
+        }
+
         searchViewModel.query.observe(viewLifecycleOwner) {
             if (it != null) {
                 GlobalScope.launch {
@@ -66,9 +73,10 @@ class SearchFragment : Fragment() {
             }
         }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            searchViewModel.flow.collectLatest { pagingData ->
-                searchContentAdapter.submitData(pagingData)
+        binding.search_swipe_container.setOnRefreshListener {
+            GlobalScope.launch {
+                searchContentAdapter.refresh()
+                binding.search_swipe_container.isRefreshing = false
             }
         }
 

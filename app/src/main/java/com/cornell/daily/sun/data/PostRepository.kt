@@ -6,6 +6,10 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 
+/**
+ * Centralized data access class. Can be used for light post-processing after fetching
+ * from the Sun Wordpress API or interacting with Android local storage.
+ */
 class PostRepository constructor(private val service: SunWordpressService) {
     suspend fun getMainFeedPosts(): MutableList<Section> {
         val featuredPostID = getFeaturedPost().id
