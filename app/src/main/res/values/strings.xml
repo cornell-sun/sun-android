@@ -12,4 +12,5 @@
     <string name="bottom_nav_sections_text">Sections</string>
     <string name="bottom_nav_feed_text">Feed</string>
     <string name="app_header_search_content_description">Search</string>
+    <string name="search_box_hint">Search</string>
 </resources>
