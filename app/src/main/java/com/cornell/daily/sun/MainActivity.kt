@@ -6,10 +6,11 @@ import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ClickEventHandler {
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,4 +29,12 @@ class MainActivity : AppCompatActivity() {
         navController.navigate(R.id.main_feed_fragment)
     }
 
+    override fun navigateTo(holder: RecyclerView.ViewHolder, fragment: Int) {
+        navController.navigate(fragment)
+    }
+
+}
+
+interface ClickEventHandler {
+    fun navigateTo(holder: RecyclerView.ViewHolder, fragment: Int)
 }

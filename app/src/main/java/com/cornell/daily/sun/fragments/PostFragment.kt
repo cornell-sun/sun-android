@@ -1,4 +1,4 @@
-package com.cornell.daily.sun
+package com.cornell.daily.sun.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +13,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.cornell.daily.sun.MainActivity
+import com.cornell.daily.sun.R
 import com.cornell.daily.sun.adapters.PostContentAdapter
 import com.cornell.daily.sun.data.*
 import com.cornell.daily.sun.util.InjectorUtils

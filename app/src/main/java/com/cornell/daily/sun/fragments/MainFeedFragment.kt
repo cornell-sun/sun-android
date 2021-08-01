@@ -1,4 +1,4 @@
-package com.cornell.daily.sun
+package com.cornell.daily.sun.fragments
 
 import android.graphics.Typeface
 import android.os.Bundle
@@ -14,6 +14,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.cornell.daily.sun.MainActivity
+import com.cornell.daily.sun.R
 import com.cornell.daily.sun.adapters.MainFeedSectionAdapter
 import com.cornell.daily.sun.util.InjectorUtils
 import com.cornell.daily.sun.viewmodels.MainFeedViewModel

@@ -1,7 +1,15 @@
 <resources>
     <string name="app_name">Cornell Sun</string>
     <string name="app_heading">The Cornell Daily Sun</string>
+    <string name="feedback_heading">Send Feedback</string>
+    <string name="contact_heading">Contact Us</string>
+    <string name="history_heading">History</string>
+    <string name="notifications_heading">Notifications</string>
+    <string name="appteam_heading">App Team</string>
+    <string name="theme_heading">Theme</string>
+    <string name="subscribe_heading">Subscribe</string>
     <string name="sections_heading">Sections</string>
+    <string name="settings_heading">Settings</string>
     <string name="byline">By %1$s</string>
     <string name="article_days_ago">%1$s DAYS AGO</string>
     <string name="article_one_day_ago">%1$s DAY AGO</string>

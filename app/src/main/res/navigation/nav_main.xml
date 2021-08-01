@@ -5,7 +5,7 @@
     app:startDestination="@id/main_feed_fragment">
     <fragment
         android:id="@+id/main_feed_fragment"
-        android:name="com.cornell.daily.sun.MainFeedFragment"
+        android:name="com.cornell.daily.sun.fragments.MainFeedFragment"
         tools:layout="@layout/main_feed_fragment">
         <action
             android:id="@+id/main_feed_to_post"
@@ -13,7 +13,7 @@
     </fragment>
     <fragment
         android:id="@+id/post_fragment"
-        android:name="com.cornell.daily.sun.PostFragment"
+        android:name="com.cornell.daily.sun.fragments.PostFragment"
         tools:layout="@layout/post_fragment">
         <action
             android:id="@+id/post_to_main_feed"
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/feed_fragment"
-        android:name="com.cornell.daily.sun.FeedFragment"
+        android:name="com.cornell.daily.sun.fragments.FeedFragment"
         tools:layout="@layout/feed_fragment">
         <action
             android:id="@+id/feed_to_post"
@@ -32,10 +32,68 @@
     </fragment>
     <fragment
         android:id="@+id/sections_fragment"
-        android:name="com.cornell.daily.sun.SectionsFragment"
+        android:name="com.cornell.daily.sun.fragments.SectionsFragment"
         tools:layout="@layout/sections_fragment">
         <action
             android:id="@+id/sections_to_section_feed"
             app:destination="@id/feed_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settings_fragment"
+        android:name="com.cornell.daily.sun.fragments.settings.SettingsFragment"
+        tools:layout="@layout/settings_fragment">
+        <action
+            android:id="@+id/settings_to_notifications"
+            app:destination="@id/settings_notifications_fragment" />
+        <action
+            android:id="@+id/settings_to_subscribe"
+            app:destination="@id/settings_subscribe_fragment" />
+        <action
+            android:id="@+id/settings_to_theme"
+            app:destination="@id/settings_theme_fragment" />
+        <action
+            android:id="@+id/settings_to_feedback"
+            app:destination="@id/settings_feedback_fragment" />
+        <action
+            android:id="@+id/settings_to_contact"
+            app:destination="@id/settings_contact_fragment" />
+        <action
+            android:id="@+id/settings_to_appteam"
+            app:destination="@id/settings_appteam_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settings_notifications_fragment"
+        android:name="com.cornell.daily.sun.fragments.settings.NotificationsFragment"
+        tools:layout="@layout/settings_notifications_fragment">
+    </fragment>
+    <fragment
+        android:id="@+id/settings_subscribe_fragment"
+        android:name="com.cornell.daily.sun.fragments.settings.SubscribeFragment"
+        tools:layout="@layout/settings_subscribe_fragment">
+    </fragment>
+    <fragment
+        android:id="@+id/settings_theme_fragment"
+        android:name="com.cornell.daily.sun.fragments.settings.ThemeFragment"
+        tools:layout="@layout/settings_theme_fragment">
+    </fragment>
+    <fragment
+        android:id="@+id/settings_feedback_fragment"
+        android:name="com.cornell.daily.sun.fragments.settings.FeedbackFragment"
+        tools:layout="@layout/settings_feedback_fragment">
+    </fragment>
+    <fragment
+        android:id="@+id/settings_contact_fragment"
+        android:name="com.cornell.daily.sun.fragments.settings.ContactUsFragment"
+        tools:layout="@layout/settings_contact_fragment">
+    </fragment>
+    <fragment
+        android:id="@+id/settings_history_fragment"
+        android:name="com.cornell.daily.sun.fragments.settings.HistoryFragment"
+        tools:layout="@layout/settings_history_fragment">
+    </fragment>
+    <fragment
+        android:id="@+id/settings_appteam_fragment"
+        android:name="com.cornell.daily.sun.fragments.settings.AppTeamFragment"
+        tools:layout="@layout/settings_appteam_fragment">
     </fragment>
 </navigation>

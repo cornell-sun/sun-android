@@ -1,4 +1,4 @@
-package com.cornell.daily.sun
+package com.cornell.daily.sun.fragments
 
 import android.graphics.Typeface
 import android.os.Bundle
@@ -14,6 +14,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import androidx.recyclerview.widget.RecyclerView
+import com.cornell.daily.sun.MainActivity
+import com.cornell.daily.sun.R
 import com.cornell.daily.sun.adapters.SectionsAdapter
 import com.cornell.daily.sun.data.SectionType
 import com.cornell.daily.sun.util.InjectorUtils
@@ -42,7 +44,7 @@ class SectionsFragment : Fragment() {
     ): View? {
         val binding = inflater.inflate(R.layout.sections_fragment, container, false)
 
-        recyclerView = binding.my_recycler_view
+        recyclerView = binding.sections_recycler_view
         viewManager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
         viewAdapter = SectionsAdapter(activity, sectionViewModel::setSection, sections)
 
@@ -74,7 +76,7 @@ class SectionsFragment : Fragment() {
         appHeaderSearch.visibility = View.INVISIBLE
         appHeader.text = (activity as MainActivity).getString(R.string.sections_heading)
         appHeader.typeface =
-            Typeface.createFromAsset((activity as MainActivity).assets, "fonts/avenir_medium.ttf")
+            Typeface.createFromAsset(context?.assets, "fonts/avenir_medium.ttf")
         appHeader.textSize = resources.getDimension(R.dimen.regular_header_text_size)
         appHeader.visibility = View.VISIBLE
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
