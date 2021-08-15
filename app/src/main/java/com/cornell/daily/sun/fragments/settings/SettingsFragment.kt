@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -73,7 +74,7 @@ class SettingsFragment : Fragment() {
         appHeaderSearch.visibility = View.INVISIBLE
         appHeader.text = (activity as MainActivity).getString(R.string.settings_heading)
         appHeader.typeface =
-            Typeface.createFromAsset(context?.assets, "fonts/avenir_medium.ttf")
+            ResourcesCompat.getFont((activity as MainActivity), R.font.avenir_medium)
         appHeader.textSize = resources.getDimension(R.dimen.regular_header_text_size)
         appHeader.visibility = View.VISIBLE
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)

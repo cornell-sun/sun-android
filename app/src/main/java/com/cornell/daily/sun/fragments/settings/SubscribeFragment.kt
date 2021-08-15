@@ -35,11 +35,7 @@ class SubscribeFragment : Fragment() {
         val appHeaderSearch =
             (activity as MainActivity).findViewById<ImageView>(R.id.app_header_search)
         appHeaderSearch.visibility = View.INVISIBLE
-        appHeader.text = (activity as MainActivity).getString(R.string.subscribe_heading)
-        appHeader.typeface =
-            Typeface.createFromAsset(context?.assets, "fonts/avenir_medium.ttf")
-        appHeader.textSize = resources.getDimension(R.dimen.regular_header_text_size)
-        appHeader.visibility = View.VISIBLE
+        appHeader.text = ""
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         return binding

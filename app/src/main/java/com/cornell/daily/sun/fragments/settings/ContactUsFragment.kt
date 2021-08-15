@@ -8,18 +8,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.cornell.daily.sun.MainActivity
 import com.cornell.daily.sun.R
-import com.cornell.daily.sun.adapters.NotificationsAdapter
-import com.cornell.daily.sun.data.NotificationsType
-import com.cornell.daily.sun.util.InjectorUtils
-import com.cornell.daily.sun.viewmodels.SectionsViewModel
-import kotlinx.android.synthetic.main.settings_notifications_fragment.view.*
 
 
 class ContactUsFragment : Fragment() {
@@ -35,11 +27,7 @@ class ContactUsFragment : Fragment() {
         val appHeaderSearch =
             (activity as MainActivity).findViewById<ImageView>(R.id.app_header_search)
         appHeaderSearch.visibility = View.INVISIBLE
-        appHeader.text = (activity as MainActivity).getString(R.string.contact_heading)
-        appHeader.typeface =
-            Typeface.createFromAsset(context?.assets, "fonts/avenir_medium.ttf")
-        appHeader.textSize = resources.getDimension(R.dimen.regular_header_text_size)
-        appHeader.visibility = View.VISIBLE
+        appHeader.text = ""
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         return binding

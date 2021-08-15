@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -76,7 +77,7 @@ class SectionsFragment : Fragment() {
         appHeaderSearch.visibility = View.INVISIBLE
         appHeader.text = (activity as MainActivity).getString(R.string.sections_heading)
         appHeader.typeface =
-            Typeface.createFromAsset(context?.assets, "fonts/avenir_medium.ttf")
+            ResourcesCompat.getFont((activity as MainActivity), R.font.sonnenstrahl_ausgezeichnet)
         appHeader.textSize = resources.getDimension(R.dimen.regular_header_text_size)
         appHeader.visibility = View.VISIBLE
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)

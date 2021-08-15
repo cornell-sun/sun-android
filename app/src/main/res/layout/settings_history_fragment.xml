@@ -15,7 +15,7 @@
         android:layout_marginEnd="15dp"
         android:layout_marginRight="15dp"
         android:fontFamily="@font/sonnenstrahl_ausgezeichnet"
-        android:text="The Cornell Daily Sun"
+        android:text="@string/history_heading"
         android:textColor="@color/black"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,11 +50,7 @@
             android:isScrollContainer="true"
             android:scrollbars="vertical"
             android:singleLine="false"
-            android:text="The Cornell Daily Sun is an independent, daily student-run newspaper serving the Cornell University and Ithaca, NY, communities.
-
-                \n\nFounded in 1880, the Sun is the oldest continuously operating college daily in the United States.
-
-                \n\nThe Sun publishes a print edition on monday, Tuesday, and Thursday during the academic year and is free on newsstands and online. The Sun is staffed entirely by Cornell students, aside from a few full-time production and business positions, and operates out of an office building in downtown Ithaca."
+            android:text="@string/history_text"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"

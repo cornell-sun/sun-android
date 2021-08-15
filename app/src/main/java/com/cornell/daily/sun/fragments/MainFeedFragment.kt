@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -75,10 +76,7 @@ class MainFeedFragment : Fragment() {
             (activity as MainActivity).findViewById<ImageView>(R.id.app_header_search)
         appHeaderSearch.visibility = View.VISIBLE
         appHeader.visibility = View.VISIBLE
-        appHeader.typeface = Typeface.createFromAsset(
-            (activity as MainActivity).assets,
-            "fonts/sonnenstrahl_ausgezeichnet.ttf"
-        )
+        appHeader.typeface = ResourcesCompat.getFont((activity as MainActivity), R.font.sonnenstrahl_ausgezeichnet)
         appHeader.textSize = resources.getDimension(R.dimen.main_feed_header_text_size)
         appHeader.text = (activity as MainActivity).getString(R.string.app_heading)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
