@@ -14,15 +14,17 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.res.ResourcesCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.cornell.daily.sun.util.InjectorUtils
-import com.cornell.daily.sun.viewmodels.SearchViewModel
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.cornell.daily.sun.util.InjectorUtils
+import com.cornell.daily.sun.viewmodels.SearchViewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ClickEventHandler {
     private val searchViewModel: SearchViewModel by viewModels { InjectorUtils.provideViewModelFactory() }
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var navController: NavController
@@ -68,12 +70,13 @@ class MainActivity : AppCompatActivity() {
         navController.navigate(R.id.main_feed_fragment)
     }
 
-    fun setupHeader(fontPath: String, text: String, textSize: Int) {
+    override fun navigateTo(holder: RecyclerView.ViewHolder, fragment: Int) {
+        navController.navigate(fragment)
+    }
+
+    fun setupHeader(font: Int, text: String, textSize: Int) {
         appHeaderView.visibility = View.VISIBLE
-        appHeaderView.typeface = Typeface.createFromAsset(
-            assets,
-            fontPath
-        )
+        appHeaderView.typeface = ResourcesCompat.getFont(this, font);
         appHeaderView.textSize = resources.getDimension(textSize)
         appHeaderView.text = text
     }
@@ -111,4 +114,8 @@ class MainActivity : AppCompatActivity() {
         imm.hideSoftInputFromWindow(searchBox.windowToken, 0)
         searchBox.clearFocus()
     }
+}
+
+interface ClickEventHandler {
+    fun navigateTo(holder: RecyclerView.ViewHolder, fragment: Int)
 }

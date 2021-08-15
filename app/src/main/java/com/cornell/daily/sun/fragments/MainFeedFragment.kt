@@ -1,16 +1,19 @@
-package com.cornell.daily.sun
+package com.cornell.daily.sun.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.cornell.daily.sun.MainActivity
+import com.cornell.daily.sun.R
 import com.cornell.daily.sun.adapters.MainFeedSectionAdapter
 import com.cornell.daily.sun.util.InjectorUtils
 import com.cornell.daily.sun.viewmodels.MainFeedViewModel
@@ -68,7 +71,7 @@ class MainFeedFragment : Fragment() {
         (activity as MainActivity).hideSearchBox()
         (activity as MainActivity).showBottomNavigationBar()
         (activity as MainActivity).setupHeader(
-            "fonts/sonnenstrahl_ausgezeichnet.ttf",
+            R.font.sonnenstrahl_ausgezeichnet,
             (activity as MainActivity).getString(R.string.app_heading),
             R.dimen.main_feed_header_text_size
         )

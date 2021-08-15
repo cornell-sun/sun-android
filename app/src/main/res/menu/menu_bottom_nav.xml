@@ -25,7 +25,7 @@
         android:title="@string/bottom_nav_bookmark_text" />
 
     <item
-        android:id="@+id/settings"
+        android:id="@+id/settings_fragment"
         android:icon="@drawable/bottom_nav_settings_icon_selector"
         android:enabled="true"
         android:title="@string/bottom_nav_settings_text" />

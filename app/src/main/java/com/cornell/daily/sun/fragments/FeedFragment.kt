@@ -1,4 +1,4 @@
-package com.cornell.daily.sun
+package com.cornell.daily.sun.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +13,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.cornell.daily.sun.MainActivity
+import com.cornell.daily.sun.R
 import com.cornell.daily.sun.adapters.SectionsPostsAdapter
 import com.cornell.daily.sun.util.InjectorUtils
 import com.cornell.daily.sun.viewmodels.PostViewModel
@@ -80,7 +82,7 @@ class FeedFragment : Fragment() {
         appHeader.visibility = View.VISIBLE
         sectionViewModel.section.value?.title?.let {
             (activity as MainActivity).setupHeader(
-                "fonts/avenir_medium.ttf",
+                R.font.avenir_medium,
                 it, R.dimen.regular_header_text_size
             )
         }

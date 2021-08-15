@@ -1,16 +1,20 @@
-package com.cornell.daily.sun
+package com.cornell.daily.sun.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import androidx.recyclerview.widget.RecyclerView
+import com.cornell.daily.sun.MainActivity
+import com.cornell.daily.sun.R
 import com.cornell.daily.sun.adapters.SectionsAdapter
 import com.cornell.daily.sun.data.SectionType
 import com.cornell.daily.sun.util.InjectorUtils
@@ -39,7 +43,7 @@ class SectionsFragment : Fragment() {
     ): View? {
         val binding = inflater.inflate(R.layout.sections_fragment, container, false)
 
-        recyclerView = binding.my_recycler_view
+        recyclerView = binding.sections_recycler_view
         viewManager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
         viewAdapter = SectionsAdapter(activity, sectionViewModel::setSection, sections)
 
@@ -65,11 +69,14 @@ class SectionsFragment : Fragment() {
         }
 
         (activity as MainActivity).setupHeader(
-            "fonts/avenir_medium.ttf",
+            R.font.avenir_medium,
             (activity as MainActivity).getString(R.string.sections_heading),
             R.dimen.regular_header_text_size
         )
 
+        val appHeaderSearch =
+            (activity as MainActivity).findViewById<ImageView>(R.id.app_header_search)
+        appHeaderSearch.visibility = View.INVISIBLE
         (activity as MainActivity).hideSearchButton()
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
         return binding

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cornell.daily.sun.R
@@ -21,8 +22,8 @@ class SectionsAdapter(
 ) : RecyclerView.Adapter<SectionsAdapter.ViewHolder>() {
 
     class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val icon: ImageView = itemView.findViewById(R.id.icon)
-        val textView: TextView = itemView.findViewById(R.id.text_view)
+        val icon: ImageView = itemView.findViewById(R.id.list_item_sections_icon)
+        val textView: TextView = itemView.findViewById(R.id.list_item_sections_text_view)
     }
 
     private val imageViewHeightRatioBig = 78.0 / 100.0
@@ -52,7 +53,7 @@ class SectionsAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.textView.text = sections[position].title
         holder.textView.typeface =
-            Typeface.createFromAsset(context?.assets, "fonts/avenir_medium.ttf")
+            ResourcesCompat.getFont(context!!, R.font.sonnenstrahl_ausgezeichnet)
         holder.icon.setImageResource(sections[position].image)
 
         val iconParams = holder.icon.layoutParams as ConstraintLayout.LayoutParams
