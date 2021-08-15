@@ -5,15 +5,8 @@ import com.google.gson.internal.bind.util.ISO8601Utils
 import java.text.ParsePosition
 import java.util.*
 
-import java.time.Duration
-import java.time.Instant
-import java.time.LocalDateTime
-import java.time.Period
-
-import java.util.*
-
 /**
- * Data class representing a Daily Sun news article
+ * Data class representing a Daily Sun Post
  */
 data class PostInfoDict(
     val date: String?,
@@ -62,12 +55,18 @@ data class PostInfoDict(
         return featuredMediaImages?.mediumLarge?.url
     }
 
+    /**
+     * @return A formatted date string for presentation
+     */
     fun getFormattedDate(): String {
         val fixedISODate = "$date-05:00"
         val date = ISO8601Utils.parse(fixedISODate, ParsePosition(0))
         return String.format("%1\$tB %1\$td, %1\$tY", date)
     }
 
+    /**
+     * @return The number of days since this post was first posted
+     */
     fun getDaysElapsedFromPost(): String {
         val fixedISODate = "$date-05:00"
         val date = ISO8601Utils.parse(fixedISODate, ParsePosition(0))

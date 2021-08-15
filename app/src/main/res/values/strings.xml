@@ -22,4 +22,5 @@
     <string name="app_header_search_content_description">Search</string>
     <string name="newsletters_heading">Daily Newsletters</string>
     <string name="history_text">The Cornell Daily Sun is an independent, daily student-run newspaper serving the Cornell University and Ithaca, NY, communities. \n\nFounded in 1880, the Sun is the oldest continuously operating college daily in the United States. \n\nThe Sun publishes a print edition on monday, Tuesday, and Thursday during the academic year and is free on newsstands and online. The Sun is staffed entirely by Cornell students, aside from a few full-time production and business positions, and operates out of an office building in downtown Ithaca.</string>
+    <string name="search_box_hint">Search</string>
 </resources>

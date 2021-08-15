@@ -6,7 +6,8 @@ import retrofit2.HttpException
 
 class PostsPagingSource(
     private val repository: PostRepository,
-    private val section: SectionType
+    private val section: SectionType?,
+    private val query: String?
 ) :
     PagingSource<Int, PostInfoDict>() {
     override fun getRefreshKey(state: PagingState<Int, PostInfoDict>): Int? {
@@ -19,7 +20,16 @@ class PostsPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PostInfoDict> {
         try {
             var nextPageNum: Int? = (params.key ?: 0) + 1
-            val res = nextPageNum?.let { repository.getPostsBySection(section, it) }
+            val res = nextPageNum?.let {
+                // Precondition: Only section or query should be set at a time
+                if (section != null) {
+                    repository.getPostsBySection(section, it)
+                } else if (query != null) {
+                    repository.getPosts(query, it)
+                } else {
+                    emptyList()
+                }
+            }
 
             if (res!!.isEmpty()) {
                 nextPageNum = null

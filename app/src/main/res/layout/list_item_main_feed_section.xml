@@ -16,15 +16,11 @@
         android:id="@+id/section_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
+        style="@style/articleCellHeaderPadding"
         android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@id/section_top_divider"
         android:textSize="16sp"
-        android:textAllCaps="true"
-        android:paddingStart="20dp"
-        tools:ignore="RtlSymmetry" />
+        android:textAllCaps="true" />
 
     <View
         android:id="@+id/section_bottom_divider"

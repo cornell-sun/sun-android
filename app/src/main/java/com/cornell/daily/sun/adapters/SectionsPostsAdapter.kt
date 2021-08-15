@@ -12,18 +12,21 @@ import com.cornell.daily.sun.R
 import com.cornell.daily.sun.data.PostInfoDict
 import com.squareup.picasso.Picasso
 
-class FeedAdapter(
+/**
+ * Recycler View Adapter for posts within a section or within For You page
+ */
+class SectionsPostsAdapter(
     private val selectPostFn: (PostInfoDict) -> Unit,
     private val context: Context?
-) : PagingDataAdapter<PostInfoDict, FeedAdapter.FeedPostHolder>(
+) : PagingDataAdapter<PostInfoDict, SectionsPostsAdapter.FeedPostHolder>(
     PostInfoDictDiffCallback()
 ) {
     class FeedPostHolder internal constructor(feedPostView: View) :
         RecyclerView.ViewHolder(feedPostView) {
-        val feedPostTimeStamp: TextView = itemView.findViewById(R.id.feed_post_time_stamp)
-        val feedPostTitle: TextView = itemView.findViewById(R.id.feed_post_title)
-        val feedPostAuthor: TextView = itemView.findViewById(R.id.feed_post_author)
-        val feedPostImage: ImageView = itemView.findViewById(R.id.feed_post_image)
+        val feedPostTimeStamp: TextView = feedPostView.findViewById(R.id.feed_post_time_stamp)
+        val feedPostTitle: TextView = feedPostView.findViewById(R.id.feed_post_title)
+        val feedPostAuthor: TextView = feedPostView.findViewById(R.id.feed_post_author)
+        val feedPostImage: ImageView = feedPostView.findViewById(R.id.feed_post_image)
     }
 
     override fun onBindViewHolder(holder: FeedPostHolder, position: Int) {

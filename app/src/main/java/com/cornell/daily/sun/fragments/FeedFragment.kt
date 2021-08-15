@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cornell.daily.sun.MainActivity
 import com.cornell.daily.sun.R
-import com.cornell.daily.sun.adapters.FeedAdapter
+import com.cornell.daily.sun.adapters.SectionsPostsAdapter
 import com.cornell.daily.sun.util.InjectorUtils
 import com.cornell.daily.sun.viewmodels.PostViewModel
 import com.cornell.daily.sun.viewmodels.SectionsViewModel
@@ -30,7 +30,7 @@ import kotlinx.coroutines.launch
 class FeedFragment : Fragment() {
     private val postViewModel: PostViewModel by activityViewModels { InjectorUtils.provideViewModelFactory() }
     private val sectionViewModel: SectionsViewModel by activityViewModels { InjectorUtils.provideViewModelFactory() }
-    private lateinit var feedAdapter: FeedAdapter
+    private lateinit var feedAdapter: SectionsPostsAdapter
     private lateinit var feedRecyclerView: RecyclerView
     private lateinit var feedLayoutManager: LinearLayoutManager
 
@@ -41,7 +41,7 @@ class FeedFragment : Fragment() {
     ): View? {
         val binding = inflater.inflate(R.layout.feed_fragment, container, false)
         setHasOptionsMenu(true)
-        feedAdapter = FeedAdapter(postViewModel::pushPost, context)
+        feedAdapter = SectionsPostsAdapter(postViewModel::pushPost, context)
         feedRecyclerView = binding.feed_recycler_view
         feedLayoutManager = LinearLayoutManager(activity)
         feedRecyclerView.apply {
@@ -80,6 +80,12 @@ class FeedFragment : Fragment() {
         val appHeader = (activity as MainActivity).findViewById<TextView>(R.id.app_header_title)
         appHeader.text = sectionViewModel.section.value?.title
         appHeader.visibility = View.VISIBLE
+        sectionViewModel.section.value?.title?.let {
+            (activity as MainActivity).setupHeader(
+                R.font.avenir_medium,
+                it, R.dimen.regular_header_text_size
+            )
+        }
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         postViewModel.postStack.value?.clear()
         return binding

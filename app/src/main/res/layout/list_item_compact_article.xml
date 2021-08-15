@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="5dp"
+    android:paddingBottom="15dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/compact_article_cell_section"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/articleCellHeaderPadding"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textAllCaps="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <View
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/compact_article_cell_section"
+        style="@style/thinDivider" />
+    <TextView
+        android:id="@+id/compact_article_cell_title"
+        app:layout_constraintTop_toBottomOf="@id/compact_article_cell_section"
+        app:layout_constraintBottom_toTopOf="@id/compact_article_cell_author"
+        app:layout_constraintLeft_toRightOf="@+id/compact_article_cell_image"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textSize="21sp"
+        android:layout_marginTop="13dp"
+        android:paddingLeft="18dp"
+        android:paddingRight="16dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_width="0dp"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:layout_height="0dp"
+        android:paddingStart="18dp"
+        android:paddingEnd="16dp" />
+    <TextView
+        android:id="@+id/compact_article_cell_author"
+        app:layout_constraintLeft_toRightOf="@id/compact_article_cell_image"
+        app:layout_constraintTop_toBottomOf="@id/compact_article_cell_title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="0dp"
+        android:layout_marginLeft="18dp"
+        android:ellipsize="end"
+        android:textColor="@color/black"
+        android:maxLines="1"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp" />
+    <ImageView
+        android:id="@+id/compact_article_cell_image"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="13dp"
+        app:layout_constraintTop_toBottomOf="@id/compact_article_cell_section"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_height="0sp"
+        app:layout_constraintHeight_min="100dp"
+        app:layout_constraintHeight_max="110dp"
+        app:layout_constraintWidth_min="100dp"
+        android:layout_width="0sp"
+        android:layout_marginStart="16dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

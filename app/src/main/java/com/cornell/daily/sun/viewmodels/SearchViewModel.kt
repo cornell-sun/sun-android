@@ -9,17 +9,16 @@ import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.cornell.daily.sun.data.PostRepository
 import com.cornell.daily.sun.data.PostsPagingSource
-import com.cornell.daily.sun.data.SectionType
 
-class SectionsViewModel(private val postRepository: PostRepository) : ViewModel() {
-    private val mutableSection: MutableLiveData<SectionType> = MutableLiveData()
-    val section: LiveData<SectionType> get() = mutableSection
+class SearchViewModel(private val postRepository: PostRepository) : ViewModel() {
+    private val mutableQuery: MutableLiveData<String> = MutableLiveData()
+    val query: LiveData<String> get() = mutableQuery
 
     val flow = Pager(PagingConfig(pageSize = 20)) {
-        PostsPagingSource(postRepository, section = mutableSection.value!!, query = null)
+        PostsPagingSource(postRepository, section = null, query = query.value)
     }.flow.cachedIn(viewModelScope)
 
-    fun setSection(section: SectionType?) {
-        this.mutableSection.value = section
+    fun setQuery(query: String) {
+        mutableQuery.value = query
     }
 }

@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -59,11 +57,9 @@ class PostFragment : Fragment() {
         }
 
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        val appHeaderSearch =
-            (activity as MainActivity).findViewById<ImageView>(R.id.app_header_search)
-        appHeaderSearch.visibility = View.INVISIBLE
-        val appHeader = (activity as MainActivity).findViewById<TextView>(R.id.app_header_title)
-        appHeader.visibility = View.INVISIBLE
+        (activity as MainActivity).hideSearchButton()
+        (activity as MainActivity).hideSearchBox()
+        (activity as MainActivity).hideHeaderText()
         return binding
     }
 
