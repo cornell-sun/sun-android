@@ -3,11 +3,8 @@ package com.cornell.daily.sun.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.cachedIn
-import com.cornell.daily.sun.data.*
+import com.cornell.daily.sun.data.PostRepository
+import com.cornell.daily.sun.data.SettingType
 
 class SettingsViewModel(private val postRepository: PostRepository) : ViewModel() {
 

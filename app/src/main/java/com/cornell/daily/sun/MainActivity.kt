@@ -1,10 +1,7 @@
 package com.cornell.daily.sun
 
 import android.app.Activity
-import android.content.Context
-import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
@@ -18,13 +15,12 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.ads.MobileAds
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.cornell.daily.sun.util.InjectorUtils
 import com.cornell.daily.sun.viewmodels.SearchViewModel
+import com.google.android.gms.ads.MobileAds
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : AppCompatActivity(), ClickEventHandler {
+class MainActivity : AppCompatActivity() {
     private val searchViewModel: SearchViewModel by viewModels { InjectorUtils.provideViewModelFactory() }
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var navController: NavController
@@ -47,7 +43,7 @@ class MainActivity : AppCompatActivity(), ClickEventHandler {
         // Set up Search Input Box here since Search is anticipated to appear in many screens
         searchBox = findViewById(R.id.search_box)
         searchBox.visibility = View.GONE
-        searchBox.setOnEditorActionListener { v, actionId, event ->
+        searchBox.setOnEditorActionListener { v, actionId, _ ->
             return@setOnEditorActionListener when (actionId) {
                 EditorInfo.IME_ACTION_SEND -> {
                     searchViewModel.setQuery(v.text.toString())
@@ -70,13 +66,9 @@ class MainActivity : AppCompatActivity(), ClickEventHandler {
         navController.navigate(R.id.main_feed_fragment)
     }
 
-    override fun navigateTo(holder: RecyclerView.ViewHolder, fragment: Int) {
-        navController.navigate(fragment)
-    }
-
     fun setupHeader(font: Int, text: String, textSize: Int) {
         appHeaderView.visibility = View.VISIBLE
-        appHeaderView.typeface = ResourcesCompat.getFont(this, font);
+        appHeaderView.typeface = ResourcesCompat.getFont(this, font)
         appHeaderView.textSize = resources.getDimension(textSize)
         appHeaderView.text = text
     }
@@ -114,8 +106,4 @@ class MainActivity : AppCompatActivity(), ClickEventHandler {
         imm.hideSoftInputFromWindow(searchBox.windowToken, 0)
         searchBox.clearFocus()
     }
-}
-
-interface ClickEventHandler {
-    fun navigateTo(holder: RecyclerView.ViewHolder, fragment: Int)
 }

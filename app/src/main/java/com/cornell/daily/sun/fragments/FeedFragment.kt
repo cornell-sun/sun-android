@@ -93,7 +93,7 @@ class FeedFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         sectionViewModel.setSection(null)
-        findNavController().navigate(R.id.feed_to_sections)
+        findNavController().popBackStack()
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
         return super.onOptionsItemSelected(item)
     }

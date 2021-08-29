@@ -38,7 +38,8 @@ class CompactPostsAdapter(
         val currentPost = this.getItem(position)
         holder.compactCellTitle.text = currentPost?.title
         holder.compactCellSection.text = Html.fromHtml(currentPost?.primaryCategory)
-        holder.compactCellAuthor.text = context?.getString(R.string.byline, currentPost?.getByline())
+        holder.compactCellAuthor.text =
+            context?.getString(R.string.byline, currentPost?.getByline())
         Picasso.get().load(currentPost?.getMediumImageUrl()).fit().centerCrop()
             .into(holder.compactCellImage)
         holder.itemView.setOnClickListener {

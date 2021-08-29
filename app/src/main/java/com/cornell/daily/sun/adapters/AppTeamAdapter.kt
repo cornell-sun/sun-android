@@ -5,13 +5,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.Switch
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.cornell.daily.sun.R
 import com.cornell.daily.sun.data.AppTeamMember
-import com.cornell.daily.sun.data.NotificationsType
 
 class AppTeamAdapter(
     private val context: Context?,

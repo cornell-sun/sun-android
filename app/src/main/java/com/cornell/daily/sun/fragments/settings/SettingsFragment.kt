@@ -1,6 +1,5 @@
 package com.cornell.daily.sun.fragments.settings
 
-import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,11 +12,11 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cornell.daily.sun.MainActivity
+import com.cornell.daily.sun.R
 import com.cornell.daily.sun.data.SettingType
 import com.cornell.daily.sun.data.SettingsSection
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 import kotlinx.android.synthetic.main.settings_fragment.view.*
-import com.cornell.daily.sun.R
 
 
 class SettingsFragment : Fragment() {
@@ -32,23 +31,29 @@ class SettingsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        settingsSections = mutableListOf<SettingsSection>(
-            SettingsSection(this,"ACCOUNT", mutableListOf<SettingType>(
+        settingsSections = mutableListOf(
+            SettingsSection(
+                this, "ACCOUNT", mutableListOf(
                     SettingType.NOTIFICATIONS,
                     SettingType.SUBSCRIBE,
                     SettingType.THEME
-                ), context),
-            SettingsSection(this, "SUPPORT", mutableListOf<SettingType>(
-                SettingType.APP_FEEDBACK,
-                SettingType.PLAYSTORE_RATE,
-            ), context),
-            SettingsSection(this, "ACCOUNT", mutableListOf<SettingType>(
-                SettingType.CONTACT,
-                SettingType.HISTORY,
-                SettingType.MASTHEAD,
-                SettingType.APPTEAM,
-                SettingType.PRIVACY_POLICY
-            ), context),
+                ), context
+            ),
+            SettingsSection(
+                this, "SUPPORT", mutableListOf(
+                    SettingType.APP_FEEDBACK,
+                    SettingType.PLAYSTORE_RATE,
+                ), context
+            ),
+            SettingsSection(
+                this, "ACCOUNT", mutableListOf(
+                    SettingType.CONTACT,
+                    SettingType.HISTORY,
+                    SettingType.MASTHEAD,
+                    SettingType.APPTEAM,
+                    SettingType.PRIVACY_POLICY
+                ), context
+            ),
         )
 
         val binding = inflater.inflate(R.layout.settings_fragment, container, false)
