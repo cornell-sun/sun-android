@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.view.View
-import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +12,6 @@ import com.cornell.daily.sun.holders.SettingsSectionHolder
 import com.cornell.daily.sun.holders.SettingsSectionViewHolder
 import io.github.luizgrp.sectionedrecyclerviewadapter.Section
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionParameters
-import androidx.appcompat.app.AppCompatActivity
 
 internal class SettingsSection(
     var fragment: Fragment,
@@ -43,14 +41,18 @@ internal class SettingsSection(
         itemHolder.itemView.setOnClickListener {
             when (itemList[position]) {
                 SettingType.PRIVACY_POLICY -> {
-                    val openURL = Intent(android.content.Intent.ACTION_VIEW)
-                    openURL.data = Uri.parse("https://cornellsun.com/2008/06/01/cornellsun-com-privacy-policy/")
+                    val openURL = Intent(Intent.ACTION_VIEW)
+                    openURL.data =
+                        Uri.parse("https://cornellsun.com/2008/06/01/cornellsun-com-privacy-policy/")
                     context?.startActivity(openURL)
-                } SettingType.MASTHEAD -> {
-                    val openURL = Intent(android.content.Intent.ACTION_VIEW)
-                    openURL.data = Uri.parse("https://i1.wp.com/cornellsun.com/wp-content/uploads/2021/04/139th-Editorial-Board-Masthead-1-e1617649678689.png?w=1028&ssl=1")
+                }
+                SettingType.MASTHEAD -> {
+                    val openURL = Intent(Intent.ACTION_VIEW)
+                    openURL.data =
+                        Uri.parse("https://i1.wp.com/cornellsun.com/wp-content/uploads/2021/04/139th-Editorial-Board-Masthead-1-e1617649678689.png?w=1028&ssl=1")
                     context?.startActivity(openURL)
-                } else -> {
+                }
+                else -> {
                     fragment.findNavController().navigate(itemList[position].fragment)
                 }
             }

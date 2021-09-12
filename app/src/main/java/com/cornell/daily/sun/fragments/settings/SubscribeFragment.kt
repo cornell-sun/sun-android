@@ -1,6 +1,5 @@
 package com.cornell.daily.sun.fragments.settings
 
-import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -17,11 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cornell.daily.sun.MainActivity
 import com.cornell.daily.sun.R
-import com.cornell.daily.sun.adapters.NotificationsAdapter
-import com.cornell.daily.sun.data.NotificationsType
-import com.cornell.daily.sun.util.InjectorUtils
-import com.cornell.daily.sun.viewmodels.SectionsViewModel
-import kotlinx.android.synthetic.main.settings_notifications_fragment.view.*
 
 
 class SubscribeFragment : Fragment() {

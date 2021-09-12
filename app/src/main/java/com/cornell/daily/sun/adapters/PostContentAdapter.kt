@@ -127,7 +127,6 @@ class PostContentAdapter(
                 } else {
                     paragraphHolder.paragraphText.text = Html.fromHtml(currentPostContent.text)
                 }
-
             }
             is SuggestedPosts -> {
                 val suggestedPostsHolder = holder as SuggestedPostsHolder

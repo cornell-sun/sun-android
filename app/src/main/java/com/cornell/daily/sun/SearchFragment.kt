@@ -5,9 +5,6 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.LinearLayout
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -18,8 +15,6 @@ import com.cornell.daily.sun.adapters.CompactPostsAdapter
 import com.cornell.daily.sun.util.InjectorUtils
 import com.cornell.daily.sun.viewmodels.PostViewModel
 import com.cornell.daily.sun.viewmodels.SearchViewModel
-import kotlinx.android.synthetic.main.feed_fragment.view.*
-import kotlinx.android.synthetic.main.main_feed_fragment.view.*
 import kotlinx.android.synthetic.main.search_fragment.view.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collectLatest

@@ -3,7 +3,6 @@ package com.cornell.daily.sun.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.cornell.daily.sun.data.PostRepository
-import com.cornell.daily.sun.data.SettingsSection
 
 class ViewModelFactory(private val postRepository: PostRepository) :
     ViewModelProvider.Factory {
