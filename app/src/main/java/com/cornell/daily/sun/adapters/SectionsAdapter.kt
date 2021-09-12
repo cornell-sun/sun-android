@@ -52,7 +52,7 @@ class SectionsAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.textView.text = sections[position].title
         holder.textView.typeface =
-            ResourcesCompat.getFont(context!!, R.font.sonnenstrahl_ausgezeichnet)
+            ResourcesCompat.getFont(context!!, R.font.avenir_medium)
         holder.icon.setImageResource(sections[position].image)
 
         val iconParams = holder.icon.layoutParams as ConstraintLayout.LayoutParams
