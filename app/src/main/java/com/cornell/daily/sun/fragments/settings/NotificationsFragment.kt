@@ -2,7 +2,9 @@ package com.cornell.daily.sun.fragments.settings
 
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -11,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,7 +37,6 @@ class NotificationsFragment : Fragment() {
         NotificationsType.SCIENCE,
         NotificationsType.DINING
     )
-    private val sectionViewModel: SectionsViewModel by activityViewModels { InjectorUtils.provideViewModelFactory() }
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: LinearLayoutManager
@@ -45,7 +47,7 @@ class NotificationsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = inflater.inflate(R.layout.settings_notifications_fragment, container, false)
-
+        setHasOptionsMenu(true)
         recyclerView = binding.notifications_recyclerView
         viewManager = LinearLayoutManager(activity)
         viewAdapter = NotificationsAdapter(context, notifications)
@@ -67,8 +69,18 @@ class NotificationsFragment : Fragment() {
             (activity as MainActivity).findViewById<ImageView>(R.id.app_header_search)
         appHeaderSearch.visibility = View.INVISIBLE
         appHeader.text = ""
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as MainActivity).hideSearchButton()
+        (activity as MainActivity).hideSearchBox()
+        (activity as MainActivity).hideHeaderText()
 
         return binding
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        findNavController().navigate(R.id.notifications_to_settings)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        return super.onOptionsItemSelected(item)
     }
 }
